@@ -3,7 +3,6 @@ import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useBlogStore } from '@/stores/blog'
-import { IMAGES } from '@/utils/assets'
 
 const router = useRouter()
 const route = useRoute()
@@ -13,7 +12,9 @@ const isMenuOpen = ref(false)
 const isSearchOpen = ref(false)
 const searchInput = ref('')
 const isScrolled = ref(false)
+const isScrollingDown = ref(false)
 const searchInputRef = ref<HTMLInputElement | null>(null)
+let lastScrollY = 0
 
 // 导航菜单 - Kyle's Blog 一致的结构
 const navItems = [
@@ -96,7 +97,17 @@ let ticking = false
 function handleScroll() {
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      isScrolled.value = window.scrollY > 50
+      const currentScrollY = window.scrollY
+      isScrolled.value = currentScrollY > 50
+      
+      // 检测滚动方向
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        isScrollingDown.value = true
+      } else {
+        isScrollingDown.value = false
+      }
+      
+      lastScrollY = currentScrollY
       ticking = false
     })
     ticking = true
@@ -116,25 +127,34 @@ onUnmounted(() => {
 
 <template>
   <header 
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="isScrolled 
-      ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg py-0' 
-      : 'bg-transparent py-2'"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-2"
+    :class="isScrolled ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-md' : 'bg-transparent'"
   >
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <!-- Logo -->
-        <router-link to="/" class="flex items-center space-x-3 group">
-          <div class="avatar-ring">
-            <img 
-              :src="IMAGES.avatar" 
-              alt="Logo" 
-              class="w-10 h-10 rounded-full border-2 border-white shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[360deg]"
-              onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Leguan'"
-            />
-          </div>
+    <nav class="w-full px-6 lg:px-12">
+      <!-- 下滑时：只显示居中标题 -->
+      <div 
+        v-if="isScrollingDown" 
+        class="flex justify-center items-center h-14"
+      >
+        <router-link to="/" class="group">
           <span 
-            class="text-lg font-bold transition-colors hidden sm:block"
+            class="text-xl font-bold transition-all hover:scale-105"
+            :class="isScrolled ? 'text-gray-800 dark:text-white' : 'text-white drop-shadow-lg'"
+          >
+            Leguan's Blog
+          </span>
+        </router-link>
+      </div>
+      
+      <!-- 上滑或顶部：标题左侧，按钮右侧 -->
+      <div 
+        v-else
+        class="flex justify-between items-center h-14"
+      >
+        <!-- Logo -->
+        <router-link to="/" class="flex items-center group">
+          <span 
+            class="text-xl font-bold transition-colors"
             :class="isScrolled ? 'text-gray-800 dark:text-white' : 'text-white drop-shadow-lg'"
           >
             Leguan's Blog
@@ -147,10 +167,8 @@ onUnmounted(() => {
             <!-- 有子菜单 -->
             <div v-if="item.children" class="relative group">
               <button 
-                class="nav-item flex items-center space-x-1.5 group/btn"
-                :class="isScrolled 
-                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
-                  : 'text-white/90 hover:text-white'"
+                class="nav-item flex items-center space-x-1.5 group/btn hover:text-[#7CB342]"
+                :class="isScrolled ? 'text-gray-700 dark:text-gray-200' : 'text-white/90 hover:text-white'"
               >
                 <Icon :icon="item.icon" class="w-4 h-4 transition-transform group-hover/btn:scale-110" />
                 <span>{{ item.name }}</span>
@@ -183,9 +201,7 @@ onUnmounted(() => {
               :to="item.path!"
               class="nav-item flex items-center space-x-1.5 group/link"
               :class="[
-                isScrolled 
-                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
-                  : 'text-white/90 hover:text-white',
+                isScrolled ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' : 'text-white/90 hover:text-white',
                 isActive(item.path!) ? '!text-[#7CB342]' : ''
               ]"
             >
@@ -198,9 +214,7 @@ onUnmounted(() => {
           <button 
             @click="isSearchOpen = true"
             class="nav-item group/search flex items-center space-x-2"
-            :class="isScrolled 
-              ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
-              : 'text-white/90 hover:text-white'"
+            :class="isScrolled ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' : 'text-white/90 hover:text-white'"
             title="搜索 (Ctrl+K)"
           >
             <Icon icon="lucide:search" class="w-4 h-4 transition-transform group-hover/search:scale-110" />
