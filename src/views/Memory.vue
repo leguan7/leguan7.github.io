@@ -99,10 +99,10 @@ const memories = [
       >
         <!-- 年份标题 -->
         <div class="flex items-center mb-6">
-          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] flex items-center justify-center text-white font-bold text-lg shadow-lg">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#7CB342] to-[#8BC34A] flex items-center justify-center text-white font-bold text-lg shadow-lg">
             {{ group.year }}
           </div>
-          <div class="h-0.5 flex-1 ml-4 bg-gradient-to-r from-[#49b1f5]/50 to-transparent"></div>
+          <div class="h-0.5 flex-1 ml-4 bg-gradient-to-r from-[#7CB342]/50 to-transparent"></div>
         </div>
 
         <!-- 照片网格 -->

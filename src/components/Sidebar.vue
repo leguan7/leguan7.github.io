@@ -103,7 +103,7 @@ function getTagColor(index: number) {
       >
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
         <!-- 悬浮动效 -->
-        <div class="absolute inset-0 bg-[#49b1f5]/0 group-hover:bg-[#49b1f5]/10 transition-colors duration-500"></div>
+        <div class="absolute inset-0 bg-[#7CB342]/0 group-hover:bg-[#7CB342]/10 transition-colors duration-500"></div>
       </div>
       
       <!-- 头像和信息 -->
@@ -122,7 +122,7 @@ function getTagColor(index: number) {
         <!-- 统计 -->
         <div class="flex justify-around mt-5 py-4 border-t border-b border-gray-100 dark:border-gray-700/50">
           <router-link to="/archives" class="text-center group cursor-pointer flex-1">
-            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-all duration-300 group-hover:scale-110">
+            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-all duration-300 group-hover:scale-110">
               {{ stats.posts }}
             </div>
             <div class="text-xs text-gray-600 dark:text-gray-400 mt-0.5 flex items-center justify-center">
@@ -132,7 +132,7 @@ function getTagColor(index: number) {
           </router-link>
           <div class="w-px bg-gray-100 dark:bg-gray-700/50"></div>
           <router-link to="/tags" class="text-center group cursor-pointer flex-1">
-            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-all duration-300 group-hover:scale-110">
+            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-all duration-300 group-hover:scale-110">
               {{ stats.tags }}
             </div>
             <div class="text-xs text-gray-600 dark:text-gray-400 mt-0.5 flex items-center justify-center">
@@ -142,7 +142,7 @@ function getTagColor(index: number) {
           </router-link>
           <div class="w-px bg-gray-100 dark:bg-gray-700/50"></div>
           <router-link to="/categories" class="text-center group cursor-pointer flex-1">
-            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-all duration-300 group-hover:scale-110">
+            <div class="text-2xl font-bold text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-all duration-300 group-hover:scale-110">
               {{ stats.categories }}
             </div>
             <div class="text-xs text-gray-600 dark:text-gray-400 mt-0.5 flex items-center justify-center">
@@ -178,7 +178,7 @@ function getTagColor(index: number) {
           </a>
           <a 
             href="mailto:leguan@example.com"
-            class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-[#49b1f5]/30 transition-all duration-300"
+            class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] text-white flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-[#7CB342]/30 transition-all duration-300"
             title="Email"
           >
             <Icon icon="lucide:mail" class="w-5 h-5" />
@@ -199,12 +199,12 @@ function getTagColor(index: number) {
         </div>
         <h4 class="font-bold text-gray-800 dark:text-white">公告栏</h4>
       </div>
-      <div class="p-3 rounded-xl bg-gradient-to-br from-[#49b1f5]/5 to-[#0abcf9]/5 border border-[#49b1f5]/10">
+      <div class="p-3 rounded-xl bg-gradient-to-br from-[#7CB342]/5 to-[#8BC34A]/5 border border-[#7CB342]/10">
         <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-          欢迎来到 <span class="text-[#49b1f5] font-medium">Leguan's Blog</span>！
+          欢迎来到 <span class="text-[#7CB342] font-medium">Leguan's Blog</span>！
         </p>
-        <p class="text-sm text-[#49b1f5] mt-2 italic flex items-center">
-          <Icon icon="lucide:quote" class="w-3 h-3 mr-1 text-[#49b1f5]/60" />
+        <p class="text-sm text-[#7CB342] mt-2 italic flex items-center">
+          <Icon icon="lucide:quote" class="w-3 h-3 mr-1 text-[#7CB342]/60" />
           Digest your emotions.
         </p>
       </div>
@@ -240,7 +240,7 @@ function getTagColor(index: number) {
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
           </div>
           <div class="flex-1 min-w-0">
-            <h5 class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-[#49b1f5] transition-colors line-clamp-2 leading-tight font-medium">
+            <h5 class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-[#7CB342] transition-colors line-clamp-2 leading-tight font-medium">
               {{ post.title }}
             </h5>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center">
@@ -282,7 +282,7 @@ function getTagColor(index: number) {
       <router-link 
         v-if="blogStore.allTags.length > 20"
         to="/tags" 
-        class="flex items-center justify-center mt-4 py-2 text-xs text-[#49b1f5] hover:text-[#ff7242] transition-colors rounded-lg hover:bg-[#49b1f5]/5"
+        class="flex items-center justify-center mt-4 py-2 text-xs text-[#7CB342] hover:text-[#D4A04D] transition-colors rounded-lg hover:bg-[#7CB342]/5"
       >
         查看全部
         <Icon icon="lucide:arrow-right" class="w-3 h-3 ml-1" />
@@ -306,13 +306,13 @@ function getTagColor(index: number) {
           v-for="category in blogStore.allCategories.slice(0, 8)"
           :key="category.name"
           :to="{ path: '/categories', query: { category: category.name } }"
-          class="flex items-center justify-between py-2.5 px-3 -mx-1 rounded-xl text-sm text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r hover:from-[#49b1f5]/10 hover:to-[#0abcf9]/10 hover:text-[#49b1f5] transition-all duration-300 group"
+          class="flex items-center justify-between py-2.5 px-3 -mx-1 rounded-xl text-sm text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r hover:from-[#7CB342]/10 hover:to-[#8BC34A]/10 hover:text-[#7CB342] transition-all duration-300 group"
         >
           <span class="flex items-center">
-            <Icon icon="lucide:folder" class="w-4 h-4 mr-2 text-[#49b1f5] group-hover:scale-110 transition-transform" />
+            <Icon icon="lucide:folder" class="w-4 h-4 mr-2 text-[#7CB342] group-hover:scale-110 transition-transform" />
             {{ category.name }}
           </span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700/50 group-hover:bg-[#49b1f5] group-hover:text-white transition-colors">
+          <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700/50 group-hover:bg-[#7CB342] group-hover:text-white transition-colors">
             {{ category.count }}
           </span>
         </router-link>
@@ -337,21 +337,21 @@ function getTagColor(index: number) {
             <Icon icon="lucide:file-text" class="w-4 h-4 mr-2 text-blue-500" />
             文章数目
           </span>
-          <span class="text-[#49b1f5] font-bold">{{ stats.posts }}</span>
+          <span class="text-[#7CB342] font-bold">{{ stats.posts }}</span>
         </div>
         <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50">
           <span class="flex items-center text-sm text-gray-700 dark:text-gray-300">
             <Icon icon="lucide:type" class="w-4 h-4 mr-2 text-green-500" />
             本站总字数
           </span>
-          <span class="text-[#49b1f5] font-bold">10k+</span>
+          <span class="text-[#7CB342] font-bold">10k+</span>
         </div>
         <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50">
           <span class="flex items-center text-sm text-gray-700 dark:text-gray-300">
             <Icon icon="lucide:refresh-cw" class="w-4 h-4 mr-2 text-purple-500" />
             最后更新
           </span>
-          <span class="text-[#49b1f5] font-bold text-sm">{{ new Date().toLocaleDateString('zh-CN') }}</span>
+          <span class="text-[#7CB342] font-bold text-sm">{{ new Date().toLocaleDateString('zh-CN') }}</span>
         </div>
       </div>
     </div>

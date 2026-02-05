@@ -80,7 +80,7 @@ const categoryStyles: Record<string, { icon: string, gradient: string }> = {
 }
 
 function getCategoryStyle(name: string) {
-  return categoryStyles[name] || { icon: 'lucide:folder', gradient: 'from-[#49b1f5] to-[#0abcf9]' }
+  return categoryStyles[name] || { icon: 'lucide:folder', gradient: 'from-[#7CB342] to-[#8BC34A]' }
 }
 </script>
 
@@ -95,7 +95,7 @@ function getCategoryStyle(name: string) {
         class="relative text-center text-white z-10 banner-content"
         :class="{ 'animate-in': isSectionVisible('banner') }"
       >
-        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] p-[2px] shadow-lg shadow-[#49b1f5]/30">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] p-[2px] shadow-lg shadow-[#7CB342]/30">
           <div class="w-full h-full rounded-2xl bg-black/30 backdrop-blur flex items-center justify-center">
             <Icon icon="lucide:folder-open" class="w-10 h-10 drop-shadow-lg" />
           </div>
@@ -114,8 +114,8 @@ function getCategoryStyle(name: string) {
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div v-if="blogStore.isLoading" class="card p-16 text-center">
         <div class="inline-flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 flex items-center justify-center mb-4">
-            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#49b1f5] border-t-transparent"></div>
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 flex items-center justify-center mb-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#7CB342] border-t-transparent"></div>
           </div>
           <p class="text-gray-500">加载中...</p>
         </div>
@@ -131,7 +131,7 @@ function getCategoryStyle(name: string) {
             @click="selectCategory(category.name)"
             class="card p-6 text-left transition-all duration-300 hover:shadow-xl group category-card"
             :class="[
-              selectedCategory === category.name ? 'ring-2 ring-[#49b1f5] shadow-xl' : '',
+              selectedCategory === category.name ? 'ring-2 ring-[#7CB342] shadow-xl' : '',
               { 'animate-in': isSectionVisible(`category-${index}`) }
             ]"
             :style="{ animationDelay: `${index * 100}ms` }"
@@ -144,7 +144,7 @@ function getCategoryStyle(name: string) {
                 <Icon :icon="getCategoryStyle(category.name).icon" class="w-8 h-8" />
               </div>
               <div class="flex-1">
-                <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-colors">
+                <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors">
                   {{ category.name }}
                 </h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center mt-1">
@@ -154,7 +154,7 @@ function getCategoryStyle(name: string) {
               </div>
               <Icon 
                 icon="lucide:chevron-right" 
-                class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-[#49b1f5] group-hover:translate-x-1 transition-all" 
+                class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-[#7CB342] group-hover:translate-x-1 transition-all" 
               />
             </div>
           </button>

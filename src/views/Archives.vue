@@ -75,7 +75,7 @@ onUnmounted(() => {
         class="relative text-center text-white z-10 banner-content"
         :class="{ 'animate-in': bannerVisible }"
       >
-        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] p-[2px] shadow-lg shadow-[#49b1f5]/30">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] p-[2px] shadow-lg shadow-[#7CB342]/30">
           <div class="w-full h-full rounded-2xl bg-black/30 backdrop-blur flex items-center justify-center">
             <Icon icon="lucide:archive" class="w-10 h-10 drop-shadow-lg" />
           </div>
@@ -95,15 +95,15 @@ onUnmounted(() => {
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div v-if="blogStore.isLoading" class="card p-16 text-center">
         <div class="inline-flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 flex items-center justify-center mb-4">
-            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#49b1f5] border-t-transparent"></div>
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 flex items-center justify-center mb-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#7CB342] border-t-transparent"></div>
           </div>
           <p class="text-gray-500">加载中...</p>
         </div>
       </div>
 
       <div v-else class="relative">
-        <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#49b1f5] via-[#49b1f5]/50 to-transparent"></div>
+        <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7CB342] via-[#7CB342]/50 to-transparent"></div>
 
         <div 
           v-for="([year, posts], yearIndex) in blogStore.archivesByYear" 
@@ -114,11 +114,11 @@ onUnmounted(() => {
         >
           <!-- Year Badge -->
           <div class="relative flex items-center mb-6">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] text-white flex items-center justify-center shadow-lg shadow-[#49b1f5]/30 z-10">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#7CB342] to-[#8BC34A] text-white flex items-center justify-center shadow-lg shadow-[#7CB342]/30 z-10">
               <Icon icon="lucide:calendar" class="w-5 h-5" />
             </div>
             <span class="ml-4 text-2xl font-bold text-gray-800 dark:text-white">{{ year }}</span>
-            <span class="ml-2 px-2 py-0.5 text-xs bg-[#49b1f5]/10 text-[#49b1f5] rounded-full">({{ posts.length }}篇)</span>
+            <span class="ml-2 px-2 py-0.5 text-xs bg-[#7CB342]/10 text-[#7CB342] rounded-full">({{ posts.length }}篇)</span>
           </div>
 
           <!-- Posts -->
@@ -127,18 +127,18 @@ onUnmounted(() => {
               v-for="(post, postIndex) in posts"
               :key="post.slug"
               :to="`/post/${post.slug}`"
-              class="card p-4 ml-6 flex items-center group relative hover:border-[#49b1f5]/30 post-item"
+              class="card p-4 ml-6 flex items-center group relative hover:border-[#7CB342]/30 post-item"
               :class="{ 'animate-in': isSectionVisible(`year-${year}`) }"
               :style="{ animationDelay: `${(postIndex + 1) * 80}ms` }"
             >
-              <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-gray-800 border-2 border-[#49b1f5] group-hover:bg-[#49b1f5] group-hover:scale-150 transition-all duration-300 z-10"></div>
+              <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-gray-800 border-2 border-[#7CB342] group-hover:bg-[#7CB342] group-hover:scale-150 transition-all duration-300 z-10"></div>
               
               <div class="text-sm text-gray-400 w-24 shrink-0 font-mono flex items-center">
-                <Icon icon="lucide:calendar-days" class="w-3.5 h-3.5 mr-1.5 text-[#49b1f5]" />
+                <Icon icon="lucide:calendar-days" class="w-3.5 h-3.5 mr-1.5 text-[#7CB342]" />
                 {{ formatDate(post.date, 'short') }}
               </div>
               
-              <h3 class="flex-1 font-medium text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-colors line-clamp-1">
+              <h3 class="flex-1 font-medium text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors line-clamp-1">
                 {{ post.title }}
               </h3>
 
@@ -152,7 +152,7 @@ onUnmounted(() => {
                 </span>
               </div>
 
-              <Icon icon="lucide:chevron-right" class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-[#49b1f5] group-hover:translate-x-1 transition-all ml-3" />
+              <Icon icon="lucide:chevron-right" class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-[#7CB342] group-hover:translate-x-1 transition-all ml-3" />
             </router-link>
           </div>
         </div>

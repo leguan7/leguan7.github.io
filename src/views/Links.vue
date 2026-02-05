@@ -137,7 +137,7 @@ const friends = [
           </div>
 
           <div class="flex-1 min-w-0 relative">
-            <h3 class="font-bold text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-colors flex items-center">
+            <h3 class="font-bold text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors flex items-center">
               {{ friend.name }}
               <Icon icon="lucide:external-link" class="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </h3>
@@ -155,7 +155,7 @@ const friends = [
         :class="{ 'animate-in': isCardVisible(friends.length) }"
       >
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
-          <Icon icon="lucide:plus-circle" class="w-5 h-5 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:plus-circle" class="w-5 h-5 mr-2 text-[#7CB342]" />
           申请友链
         </h2>
         <div class="text-gray-600 dark:text-gray-400 space-y-3">

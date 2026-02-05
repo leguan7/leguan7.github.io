@@ -194,7 +194,7 @@ function getMoodColor(mood: string) {
               <Icon icon="lucide:heart" class="w-4 h-4 mr-1.5 group-hover:scale-110 transition-transform" />
               <span>{{ shuoshuo.likes }}</span>
             </button>
-            <button class="flex items-center text-gray-500 hover:text-[#49b1f5] transition-colors text-sm">
+            <button class="flex items-center text-gray-500 hover:text-[#7CB342] transition-colors text-sm">
               <Icon icon="lucide:message-circle" class="w-4 h-4 mr-1.5" />
               <span>评论</span>
             </button>
@@ -208,7 +208,7 @@ function getMoodColor(mood: string) {
 
       <!-- 加载更多 -->
       <div class="text-center mt-8">
-        <button class="btn border border-[#49b1f5] text-[#49b1f5] hover:bg-[#49b1f5] hover:text-white">
+        <button class="btn border border-[#7CB342] text-[#7CB342] hover:bg-[#7CB342] hover:text-white">
           <Icon icon="lucide:plus" class="w-4 h-4 mr-2" />
           加载更多
         </button>

@@ -149,7 +149,7 @@ onUnmounted(() => {
               <button 
                 class="nav-item flex items-center space-x-1.5 group/btn"
                 :class="isScrolled 
-                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#49b1f5]' 
+                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
                   : 'text-white/90 hover:text-white'"
               >
                 <Icon :icon="item.icon" class="w-4 h-4 transition-transform group-hover/btn:scale-110" />
@@ -164,11 +164,11 @@ onUnmounted(() => {
                     v-for="(child, index) in item.children"
                     :key="child.name"
                     :to="child.path!"
-                    class="dropdown-item flex items-center space-x-3 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-gradient-to-r hover:from-[#49b1f5] hover:to-[#0abcf9] hover:text-white transition-all duration-300"
-                    :class="{ 'bg-[#49b1f5]/10 text-[#49b1f5]': isActive(child.path!) }"
+                    class="dropdown-item flex items-center space-x-3 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-gradient-to-r hover:from-[#7CB342] hover:to-[#8BC34A] hover:text-white transition-all duration-300"
+                    :class="{ 'bg-[#7CB342]/10 text-[#7CB342]': isActive(child.path!) }"
                     :style="{ animationDelay: `${index * 50}ms` }"
                   >
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 flex items-center justify-center">
                       <Icon :icon="child.icon!" class="w-4 h-4" />
                     </div>
                     <span class="font-medium">{{ child.name }}</span>
@@ -184,9 +184,9 @@ onUnmounted(() => {
               class="nav-item flex items-center space-x-1.5 group/link"
               :class="[
                 isScrolled 
-                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#49b1f5]' 
+                  ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
                   : 'text-white/90 hover:text-white',
-                isActive(item.path!) ? '!text-[#49b1f5]' : ''
+                isActive(item.path!) ? '!text-[#7CB342]' : ''
               ]"
             >
               <Icon :icon="item.icon" class="w-4 h-4 transition-transform group-hover/link:scale-110 group-hover/link:rotate-12" />
@@ -199,7 +199,7 @@ onUnmounted(() => {
             @click="isSearchOpen = true"
             class="nav-item group/search flex items-center space-x-2"
             :class="isScrolled 
-              ? 'text-gray-700 dark:text-gray-200 hover:text-[#49b1f5]' 
+              ? 'text-gray-700 dark:text-gray-200 hover:text-[#7CB342]' 
               : 'text-white/90 hover:text-white'"
             title="搜索 (Ctrl+K)"
           >
@@ -255,7 +255,7 @@ onUnmounted(() => {
                   v-model="searchInput"
                   type="text"
                   placeholder="搜索文章..."
-                  class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 border-none outline-none text-sm focus:ring-2 focus:ring-[#49b1f5]/50 transition-all"
+                  class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 border-none outline-none text-sm focus:ring-2 focus:ring-[#7CB342]/50 transition-all"
                   @keyup.enter="handleSearch(); isMenuOpen = false"
                 />
               </div>
@@ -268,15 +268,15 @@ onUnmounted(() => {
                   class="w-full flex items-center justify-between px-5 py-3.5 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                 >
                   <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 flex items-center justify-center">
-                      <Icon :icon="item.icon" class="w-4 h-4 text-[#49b1f5]" />
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 flex items-center justify-center">
+                      <Icon :icon="item.icon" class="w-4 h-4 text-[#7CB342]" />
                     </div>
                     <span class="font-medium">{{ item.name }}</span>
                   </div>
                   <Icon 
                     icon="lucide:chevron-down" 
                     class="w-4 h-4 transition-transform duration-300 text-gray-500"
-                    :class="{ 'rotate-180 text-[#49b1f5]': activeDropdown === item.name }"
+                    :class="{ 'rotate-180 text-[#7CB342]': activeDropdown === item.name }"
                   />
                 </button>
                 
@@ -294,8 +294,8 @@ onUnmounted(() => {
                       :key="child.name"
                       :to="child.path!"
                       @click="isMenuOpen = false"
-                      class="flex items-center space-x-3 px-5 py-3 ml-12 text-gray-600 dark:text-gray-300 hover:text-[#49b1f5] transition-colors border-l-2 border-transparent hover:border-[#49b1f5]"
-                      :class="{ 'text-[#49b1f5] border-[#49b1f5]': isActive(child.path!) }"
+                      class="flex items-center space-x-3 px-5 py-3 ml-12 text-gray-600 dark:text-gray-300 hover:text-[#7CB342] transition-colors border-l-2 border-transparent hover:border-[#7CB342]"
+                      :class="{ 'text-[#7CB342] border-[#7CB342]': isActive(child.path!) }"
                     >
                       <Icon :icon="child.icon!" class="w-4 h-4" />
                       <span>{{ child.name }}</span>
@@ -309,17 +309,17 @@ onUnmounted(() => {
                 :to="item.path!"
                 @click="isMenuOpen = false"
                 class="mobile-menu-item flex items-center space-x-3 px-5 py-3.5 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                :class="{ 'text-[#49b1f5] bg-[#49b1f5]/5': isActive(item.path!) }"
+                :class="{ 'text-[#7CB342] bg-[#7CB342]/5': isActive(item.path!) }"
                 :style="{ animationDelay: `${itemIndex * 50}ms` }"
               >
                 <div 
                   class="w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-                  :class="isActive(item.path!) ? 'bg-[#49b1f5] text-white' : 'bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 text-[#49b1f5]'"
+                  :class="isActive(item.path!) ? 'bg-[#7CB342] text-white' : 'bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 text-[#7CB342]'"
                 >
                   <Icon :icon="item.icon" class="w-4 h-4" />
                 </div>
                 <span class="font-medium">{{ item.name }}</span>
-                <Icon v-if="isActive(item.path!)" icon="lucide:check" class="w-4 h-4 ml-auto text-[#49b1f5]" />
+                <Icon v-if="isActive(item.path!)" icon="lucide:check" class="w-4 h-4 ml-auto text-[#7CB342]" />
               </router-link>
             </template>
           </div>
@@ -357,7 +357,7 @@ onUnmounted(() => {
               >
                 <!-- 搜索头部 -->
                 <div class="flex items-center px-6 py-5 border-b border-gray-200/50 dark:border-gray-700/50">
-                  <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] flex items-center justify-center mr-4">
+                  <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] flex items-center justify-center mr-4">
                     <Icon icon="lucide:search" class="w-5 h-5 text-white" />
                   </div>
                   <input 
@@ -378,8 +378,8 @@ onUnmounted(() => {
                 
                 <!-- 搜索提示 -->
                 <div class="p-8 text-center">
-                  <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#49b1f5]/10 to-[#0abcf9]/10 flex items-center justify-center">
-                    <Icon icon="lucide:lightbulb" class="w-10 h-10 text-[#49b1f5] animate-pulse" />
+                  <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7CB342]/10 to-[#8BC34A]/10 flex items-center justify-center">
+                    <Icon icon="lucide:lightbulb" class="w-10 h-10 text-[#7CB342] animate-pulse" />
                   </div>
                   <p class="text-gray-500 dark:text-gray-400 mb-2">输入关键词后按 Enter 搜索</p>
                   <div class="flex items-center justify-center space-x-2 text-xs text-gray-400">

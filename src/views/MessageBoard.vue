@@ -81,7 +81,7 @@ onUnmounted(() => {
         :class="{ 'animate-in': isCardVisible(0) }"
       >
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-5 flex items-center">
-          <Icon icon="lucide:pen-line" class="w-5 h-5 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:pen-line" class="w-5 h-5 mr-2 text-[#7CB342]" />
           发表留言
         </h2>
         
@@ -97,7 +97,7 @@ onUnmounted(() => {
                 type="text" 
                 required
                 placeholder="你的昵称"
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#49b1f5] focus:ring-2 focus:ring-[#49b1f5]/20 transition-all outline-none"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#7CB342] focus:ring-2 focus:ring-[#7CB342]/20 transition-all outline-none"
               />
             </div>
             <div>
@@ -109,7 +109,7 @@ onUnmounted(() => {
                 v-model="email"
                 type="email" 
                 placeholder="选填，用于获取头像"
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#49b1f5] focus:ring-2 focus:ring-[#49b1f5]/20 transition-all outline-none"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#7CB342] focus:ring-2 focus:ring-[#7CB342]/20 transition-all outline-none"
               />
             </div>
           </div>
@@ -124,7 +124,7 @@ onUnmounted(() => {
               rows="4"
               required
               placeholder="说点什么吧..."
-              class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#49b1f5] focus:ring-2 focus:ring-[#49b1f5]/20 transition-all outline-none resize-none"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:border-[#7CB342] focus:ring-2 focus:ring-[#7CB342]/20 transition-all outline-none resize-none"
             ></textarea>
           </div>
 

@@ -107,7 +107,7 @@ const stats = {
         :class="{ 'animate-in': isCardVisible(0) }"
       >
         <div class="card p-5 text-center">
-          <Icon icon="lucide:calendar-check" class="w-8 h-8 text-[#49b1f5] mx-auto" />
+          <Icon icon="lucide:calendar-check" class="w-8 h-8 text-[#7CB342] mx-auto" />
           <div class="text-2xl font-bold text-gray-800 dark:text-white mt-2">{{ stats.totalDays }}</div>
           <div class="text-sm text-gray-500">累计打卡</div>
         </div>
@@ -169,7 +169,7 @@ const stats = {
               </div>
 
               <!-- 备注 -->
-              <div v-if="log.note" class="text-sm text-gray-500 dark:text-gray-400 italic border-l-2 border-[#49b1f5] pl-3 bg-gray-50 dark:bg-gray-800/30 py-2 rounded-r">
+              <div v-if="log.note" class="text-sm text-gray-500 dark:text-gray-400 italic border-l-2 border-[#7CB342] pl-3 bg-gray-50 dark:bg-gray-800/30 py-2 rounded-r">
                 <Icon icon="lucide:quote" class="w-3 h-3 inline mr-1 opacity-50" />
                 {{ log.note }}
               </div>
@@ -181,7 +181,7 @@ const stats = {
       <!-- 激励 -->
       <div 
         :ref="(el) => setCardRef(el, fitnessLogs.length + 1)"
-        class="card p-6 mt-8 text-center bg-gradient-to-r from-[#49b1f5]/10 to-[#0abcf9]/10 animate-card"
+        class="card p-6 mt-8 text-center bg-gradient-to-r from-[#7CB342]/10 to-[#8BC34A]/10 animate-card"
         :class="{ 'animate-in': isCardVisible(fitnessLogs.length + 1) }"
       >
         <Icon icon="lucide:trophy" class="w-12 h-12 text-yellow-500 mx-auto mb-3" />

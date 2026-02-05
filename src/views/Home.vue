@@ -13,18 +13,41 @@ const typedText = ref('')
 const fullText = 'Digest your emotions'
 const cursorVisible = ref(true)
 
-// 打字机效果
+// 打字机效果 - 循环打字和删除
 onMounted(() => {
-  let i = 0
-  const typeInterval = setInterval(() => {
-    if (i < fullText.length) {
-      typedText.value += fullText.charAt(i)
-      i++
+  let isTyping = true
+  let charIndex = 0
+  
+  const runTypewriter = () => {
+    if (isTyping) {
+      // 打字阶段
+      if (charIndex < fullText.length) {
+        typedText.value = fullText.substring(0, charIndex + 1)
+        charIndex++
+        setTimeout(runTypewriter, 100)
+      } else {
+        // 打字完成，等待1秒后开始删除
+        isTyping = false
+        setTimeout(runTypewriter, 1000)
+      }
     } else {
-      clearInterval(typeInterval)
+      // 删除阶段
+      if (charIndex > 0) {
+        charIndex--
+        typedText.value = fullText.substring(0, charIndex)
+        setTimeout(runTypewriter, 60) // 删除速度稍快
+      } else {
+        // 删除完成，等待1秒后重新开始打字
+        isTyping = true
+        setTimeout(runTypewriter, 1000)
+      }
     }
-  }, 100)
+  }
+  
+  // 启动打字机效果
+  runTypewriter()
 
+  // 光标闪烁
   setInterval(() => {
     cursorVisible.value = !cursorVisible.value
   }, 530)
@@ -77,28 +100,6 @@ function scrollDown() {
             :class="{ 'opacity-0': !cursorVisible }"
           ></span>
         </p>
-        
-        <!-- 统计信息 - Kyle's Blog 风格 -->
-        <div class="flex justify-center items-center space-x-2 mt-6 text-sm hero-stats">
-          <router-link 
-            to="/archives"
-            class="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm hover:bg-[#49b1f5] transition-all duration-300 cursor-pointer"
-          >
-            文章 <strong>{{ blogStore.posts.length }}</strong>
-          </router-link>
-          <router-link 
-            to="/tags"
-            class="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm hover:bg-[#49b1f5] transition-all duration-300 cursor-pointer"
-          >
-            标签 <strong>{{ blogStore.allTags.length }}</strong>
-          </router-link>
-          <router-link 
-            to="/categories"
-            class="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm hover:bg-[#49b1f5] transition-all duration-300 cursor-pointer"
-          >
-            分类 <strong>{{ blogStore.allCategories.length }}</strong>
-          </router-link>
-        </div>
       </div>
 
       <!-- 向下滚动箭头 -->
@@ -130,13 +131,13 @@ function scrollDown() {
       class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"
     >
       <div class="card flex items-center justify-between px-5 py-3">
-        <span class="text-[#49b1f5] flex items-center">
+        <span class="text-[#7CB342] flex items-center">
           <Icon icon="lucide:search" class="w-4 h-4 mr-2" />
           搜索 "<strong>{{ blogStore.searchQuery }}</strong>" 找到 {{ blogStore.filteredPosts.length }} 篇文章
         </span>
         <button 
           @click="blogStore.setSearchQuery('')"
-          class="text-gray-400 hover:text-[#ff7242] transition-colors"
+          class="text-gray-400 hover:text-[#D4A04D] transition-colors"
         >
           <Icon icon="lucide:x-circle" class="w-5 h-5" />
         </button>
@@ -150,7 +151,7 @@ function scrollDown() {
         <div class="lg:w-2/3 space-y-6">
           <!-- Loading -->
           <div v-if="blogStore.isLoading" class="card p-16 text-center">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-[#49b1f5] border-t-transparent"></div>
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-[#7CB342] border-t-transparent"></div>
             <p class="mt-4 text-gray-500">加载中...</p>
           </div>
 
@@ -177,7 +178,7 @@ function scrollDown() {
               @click="goToPage(currentPage - 1)"
               :disabled="currentPage === 1"
               class="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-              :class="currentPage === 1 ? '' : 'card hover:bg-[#49b1f5] hover:text-white'"
+              :class="currentPage === 1 ? '' : 'card hover:bg-[#7CB342] hover:text-white'"
             >
               <Icon icon="lucide:chevron-left" class="w-4 h-4" />
             </button>
@@ -188,8 +189,8 @@ function scrollDown() {
                 @click="goToPage(page)"
                 class="w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all duration-300"
                 :class="page === currentPage 
-                  ? 'bg-[#49b1f5] text-white shadow-lg shadow-[#49b1f5]/30' 
-                  : 'card hover:bg-[#49b1f5] hover:text-white'"
+                  ? 'bg-[#7CB342] text-white shadow-lg shadow-[#7CB342]/30' 
+                  : 'card hover:bg-[#7CB342] hover:text-white'"
               >
                 {{ page }}
               </button>
@@ -205,7 +206,7 @@ function scrollDown() {
               @click="goToPage(currentPage + 1)"
               :disabled="currentPage === totalPages"
               class="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-              :class="currentPage === totalPages ? '' : 'card hover:bg-[#49b1f5] hover:text-white'"
+              :class="currentPage === totalPages ? '' : 'card hover:bg-[#7CB342] hover:text-white'"
             >
               <Icon icon="lucide:chevron-right" class="w-4 h-4" />
             </button>
@@ -230,11 +231,6 @@ function scrollDown() {
 
 .hero-subtitle {
   animation: fade-in-up 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-  transform-origin: center center;
-}
-
-.hero-stats {
-  animation: fade-in-up 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
   transform-origin: center center;
 }
 

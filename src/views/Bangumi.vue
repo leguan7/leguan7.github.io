@@ -119,7 +119,7 @@ function getStatusColor(status: string) {
 
           <!-- 信息 -->
           <div class="p-4">
-            <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#49b1f5] transition-colors">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors">
               {{ bangumi.name }}
             </h3>
             <div class="flex flex-wrap gap-1.5 mt-2">
@@ -143,7 +143,7 @@ function getStatusColor(status: string) {
       >
         <div class="flex justify-around text-center">
           <div>
-            <div class="text-3xl font-bold text-[#49b1f5]">{{ bangumiList.length }}</div>
+            <div class="text-3xl font-bold text-[#7CB342]">{{ bangumiList.length }}</div>
             <div class="text-sm text-gray-500 mt-1">总番剧</div>
           </div>
           <div>

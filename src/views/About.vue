@@ -97,15 +97,15 @@ const timeline = [
         :class="{ 'animate-in': isCardVisible(0) }"
       >
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-5 flex items-center">
-          <Icon icon="lucide:user" class="w-6 h-6 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:user" class="w-6 h-6 mr-2 text-[#7CB342]" />
           个人简介
         </h2>
         <div class="text-gray-600 dark:text-gray-400 space-y-4 leading-relaxed">
           <p>
-            你好！我是 <strong class="text-[#49b1f5]">Leguan</strong>，一个想要看看世界的人。
+            你好！我是 <strong class="text-[#7CB342]">Leguan</strong>，一个想要看看世界的人。
           </p>
-          <blockquote class="border-l-4 border-[#49b1f5] pl-4 py-3 bg-gradient-to-r from-[#49b1f5]/10 to-transparent rounded-r-lg">
-            <p class="italic text-[#49b1f5]">"Digest your emotions"</p>
+          <blockquote class="border-l-4 border-[#7CB342] pl-4 py-3 bg-gradient-to-r from-[#7CB342]/10 to-transparent rounded-r-lg">
+            <p class="italic text-[#7CB342]">"Digest your emotions"</p>
             <p class="text-sm text-gray-500 mt-1">— 消化你的情绪</p>
           </blockquote>
           <p>这个博客是我记录生活、分享技术、沉淀思考的地方。</p>
@@ -137,7 +137,7 @@ const timeline = [
         :class="{ 'animate-in': isCardVisible(1) }"
       >
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-          <Icon icon="lucide:code-2" class="w-6 h-6 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:code-2" class="w-6 h-6 mr-2 text-[#7CB342]" />
           技术栈
         </h2>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -159,20 +159,20 @@ const timeline = [
         :class="{ 'animate-in': isCardVisible(2) }"
       >
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-          <Icon icon="lucide:history" class="w-6 h-6 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:history" class="w-6 h-6 mr-2 text-[#7CB342]" />
           时间线
         </h2>
         <div class="relative pl-8">
-          <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#49b1f5] to-transparent"></div>
+          <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#7CB342] to-transparent"></div>
           <div class="space-y-6">
             <div 
               v-for="item in timeline"
               :key="item.year"
               class="relative"
             >
-              <div class="absolute -left-5 w-4 h-4 rounded-full bg-[#49b1f5] shadow-lg shadow-[#49b1f5]/30"></div>
+              <div class="absolute -left-5 w-4 h-4 rounded-full bg-[#7CB342] shadow-lg shadow-[#7CB342]/30"></div>
               <div class="ml-4">
-                <div class="font-bold text-[#49b1f5] text-lg">{{ item.year }}</div>
+                <div class="font-bold text-[#7CB342] text-lg">{{ item.year }}</div>
                 <div class="flex items-center text-gray-600 dark:text-gray-400 mt-1">
                   <Icon :icon="item.icon" class="w-4 h-4 mr-2" />
                   {{ item.event }}
@@ -190,7 +190,7 @@ const timeline = [
         :class="{ 'animate-in': isCardVisible(3) }"
       >
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
-          <Icon icon="lucide:mail" class="w-6 h-6 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:mail" class="w-6 h-6 mr-2 text-[#7CB342]" />
           联系我
         </h2>
         <div class="flex flex-wrap gap-3">

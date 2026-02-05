@@ -114,7 +114,7 @@ const showReward = ref(false)
   <div>
     <!-- Loading -->
     <div v-if="blogStore.isLoading" class="min-h-screen flex items-center justify-center">
-      <Icon icon="lucide:loader-2" class="w-12 h-12 animate-spin text-[#49b1f5]" />
+      <Icon icon="lucide:loader-2" class="w-12 h-12 animate-spin text-[#7CB342]" />
     </div>
 
     <!-- Post Content -->
@@ -132,7 +132,7 @@ const showReward = ref(false)
               v-for="category in post.categories"
               :key="category"
               :to="{ path: '/categories', query: { category } }"
-              class="px-4 py-1.5 text-sm bg-[#49b1f5]/80 rounded-full backdrop-blur-sm hover:bg-[#ff7242] transition-all duration-300 shadow-lg"
+              class="px-4 py-1.5 text-sm bg-[#7CB342]/80 rounded-full backdrop-blur-sm hover:bg-[#D4A04D] transition-all duration-300 shadow-lg"
             >
               <Icon icon="lucide:folder" class="w-3.5 h-3.5 inline mr-1.5" />
               {{ category }}
@@ -147,17 +147,17 @@ const showReward = ref(false)
           <!-- 元信息 -->
           <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 mt-6 text-white/90 text-sm">
             <span class="flex items-center space-x-1.5">
-              <Icon icon="lucide:calendar" class="w-4 h-4 text-[#49b1f5]" />
+              <Icon icon="lucide:calendar" class="w-4 h-4 text-[#7CB342]" />
               <span>发布于 {{ formattedDate }}</span>
             </span>
             <span class="hidden sm:inline text-white/50">|</span>
             <span class="flex items-center space-x-1.5">
-              <Icon icon="lucide:clock" class="w-4 h-4 text-[#49b1f5]" />
+              <Icon icon="lucide:clock" class="w-4 h-4 text-[#7CB342]" />
               <span>{{ readingTime }} 分钟阅读</span>
             </span>
             <span class="hidden sm:inline text-white/50">|</span>
             <span class="flex items-center space-x-1.5">
-              <Icon icon="lucide:book-open" class="w-4 h-4 text-[#49b1f5]" />
+              <Icon icon="lucide:book-open" class="w-4 h-4 text-[#7CB342]" />
               <span>约 {{ wordCount }} 字</span>
             </span>
           </div>
@@ -232,9 +232,9 @@ const showReward = ref(false)
               </div>
 
               <!-- 版权声明 -->
-              <div class="mt-8 p-5 rounded-xl bg-gradient-to-r from-[#49b1f5]/5 to-[#0abcf9]/5 border border-[#49b1f5]/20">
+              <div class="mt-8 p-5 rounded-xl bg-gradient-to-r from-[#7CB342]/5 to-[#8BC34A]/5 border border-[#7CB342]/20">
                 <h4 class="font-bold text-gray-800 dark:text-white mb-3 flex items-center text-sm">
-                  <Icon icon="lucide:copyright" class="w-4 h-4 mr-2 text-[#49b1f5]" />
+                  <Icon icon="lucide:copyright" class="w-4 h-4 mr-2 text-[#7CB342]" />
                   版权声明
                 </h4>
                 <div class="text-sm text-gray-600 dark:text-gray-400 space-y-2">
@@ -244,11 +244,11 @@ const showReward = ref(false)
                   </p>
                   <p class="flex items-start">
                     <Icon icon="lucide:link" class="w-3.5 h-3.5 mr-2 mt-0.5 text-gray-500 shrink-0" />
-                    <span class="break-all"><strong class="text-gray-700 dark:text-gray-300">本文链接：</strong><span class="text-[#49b1f5]">{{ `${window?.location?.origin || ''}/post/${post.slug}` }}</span></span>
+                    <span class="break-all"><strong class="text-gray-700 dark:text-gray-300">本文链接：</strong><span class="text-[#7CB342]">{{ `${window?.location?.origin || ''}/post/${post.slug}` }}</span></span>
                   </p>
                   <p class="flex items-start">
                     <Icon icon="lucide:scale" class="w-3.5 h-3.5 mr-2 mt-0.5 text-gray-500 shrink-0" />
-                    <span><strong class="text-gray-700 dark:text-gray-300">版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="text-[#49b1f5] hover:text-[#ff7242]">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源！</span>
+                    <span><strong class="text-gray-700 dark:text-gray-300">版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="text-[#7CB342] hover:text-[#D4A04D]">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源！</span>
                   </p>
                 </div>
               </div>
@@ -272,7 +272,7 @@ const showReward = ref(false)
                       <Icon icon="lucide:arrow-left" class="w-3 h-3 mr-1" />
                       上一篇
                     </div>
-                    <h4 class="font-medium line-clamp-2 group-hover:text-[#49b1f5] transition-colors">
+                    <h4 class="font-medium line-clamp-2 group-hover:text-[#7CB342] transition-colors">
                       {{ prevPost.title }}
                     </h4>
                   </div>
@@ -295,7 +295,7 @@ const showReward = ref(false)
                       下一篇
                       <Icon icon="lucide:arrow-right" class="w-3 h-3 ml-1" />
                     </div>
-                    <h4 class="font-medium line-clamp-2 group-hover:text-[#49b1f5] transition-colors">
+                    <h4 class="font-medium line-clamp-2 group-hover:text-[#7CB342] transition-colors">
                       {{ nextPost.title }}
                     </h4>
                   </div>
@@ -307,7 +307,7 @@ const showReward = ref(false)
             <!-- 相关推荐 - Kyle's Blog 风格 -->
             <div v-if="relatedPosts.length > 0" class="card p-6 mt-6">
               <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-5 flex items-center">
-                <Icon icon="lucide:thumbs-up" class="w-5 h-5 mr-2 text-[#49b1f5]" />
+                <Icon icon="lucide:thumbs-up" class="w-5 h-5 mr-2 text-[#7CB342]" />
                 相关推荐
               </h3>
               <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -327,12 +327,12 @@ const showReward = ref(false)
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="absolute bottom-2 left-2 right-2 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span class="bg-[#49b1f5]/80 px-2 py-0.5 rounded">
+                      <span class="bg-[#7CB342]/80 px-2 py-0.5 rounded">
                         {{ related.categories[0] || '未分类' }}
                       </span>
                     </div>
                   </div>
-                  <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-[#49b1f5] transition-colors line-clamp-2 leading-relaxed">
+                  <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-[#7CB342] transition-colors line-clamp-2 leading-relaxed">
                     {{ related.title }}
                   </h4>
                 </router-link>
@@ -345,7 +345,7 @@ const showReward = ref(false)
             <!-- TOC 目录 - Kyle's Blog 风格 -->
             <div v-if="toc.length > 0" class="card p-5 mb-5 sticky top-20">
               <div class="flex items-center space-x-2 mb-4 pb-3 border-b border-gray-100 dark:border-gray-700">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#49b1f5] to-[#0abcf9] flex items-center justify-center">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#7CB342] to-[#8BC34A] flex items-center justify-center">
                   <Icon icon="lucide:list" class="w-4 h-4 text-white" />
                 </div>
                 <h4 class="font-bold text-gray-800 dark:text-white">目录</h4>
@@ -356,16 +356,16 @@ const showReward = ref(false)
                   v-for="item in toc"
                   :key="item.id"
                   :href="`#${item.id}`"
-                  class="toc-item block py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-[#49b1f5] transition-all duration-200 border-l-2 border-transparent hover:border-[#49b1f5] hover:pl-1"
+                  class="toc-item block py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-[#7CB342] transition-all duration-200 border-l-2 border-transparent hover:border-[#7CB342] hover:pl-1"
                   :class="[
                     item.level === 1 ? 'pl-3 font-medium' : '',
                     item.level === 2 ? 'pl-6' : '',
                     item.level === 3 ? 'pl-9 text-xs' : '',
-                    activeTocId === item.id ? 'text-[#49b1f5] border-[#49b1f5] bg-[#49b1f5]/5' : ''
+                    activeTocId === item.id ? 'text-[#7CB342] border-[#7CB342] bg-[#7CB342]/5' : ''
                   ]"
                 >
                   <span class="flex items-center">
-                    <span v-if="item.level === 1" class="w-1.5 h-1.5 rounded-full bg-[#49b1f5] mr-2"></span>
+                    <span v-if="item.level === 1" class="w-1.5 h-1.5 rounded-full bg-[#7CB342] mr-2"></span>
                     <span v-else-if="item.level === 2" class="w-1 h-1 rounded-full bg-gray-400 mr-2"></span>
                     <span class="line-clamp-1">{{ item.text }}</span>
                   </span>
@@ -407,7 +407,7 @@ const showReward = ref(false)
 }
 
 .toc-scrollbar::-webkit-scrollbar-thumb {
-  background: #49b1f5;
+  background: #7CB342;
   border-radius: 2px;
 }
 

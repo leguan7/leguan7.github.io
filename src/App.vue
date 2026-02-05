@@ -36,7 +36,7 @@ function handleScroll() {
 
 // 点击烟花效果
 function createClickEffect(e: MouseEvent) {
-  const colors = ['#ff7242', '#49b1f5', '#ffc107', '#e91e63', '#4caf50']
+  const colors = ['#D4A04D', '#7CB342', '#ffc107', '#e91e63', '#4caf50']
   const particles = 6
   
   for (let i = 0; i < particles; i++) {
@@ -107,7 +107,7 @@ function scrollToTop() {
   <!-- 页面加载进度条 -->
   <div 
     v-if="isLoading"
-    class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#49b1f5] via-[#ff7242] to-[#49b1f5] z-[9999] loading-bar"
+    class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7CB342] via-[#D4A04D] to-[#7CB342] z-[9999] loading-bar"
   ></div>
 
   <!-- 固定背景图 -->

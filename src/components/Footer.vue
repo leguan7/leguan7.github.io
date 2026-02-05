@@ -31,7 +31,7 @@ const socialLinks = [
   { icon: 'lucide:mail', href: 'mailto:leguan@example.com', label: 'Email', color: 'hover:bg-gradient-to-br hover:from-orange-500 hover:to-pink-500' },
   { icon: 'ri:qq-fill', href: '#', label: 'QQ', color: 'hover:bg-[#12B7F5]' },
   { icon: 'ri:wechat-fill', href: '#', label: 'WeChat', color: 'hover:bg-[#07C160]' },
-  { icon: 'lucide:message-circle', href: '/messageboard', label: '留言板', isRouter: true, color: 'hover:bg-[#49b1f5]' },
+  { icon: 'lucide:message-circle', href: '/messageboard', label: '留言板', isRouter: true, color: 'hover:bg-[#7CB342]' },
 ]
 </script>
 
@@ -49,7 +49,7 @@ const socialLinks = [
           :style="{ animationDelay: '0ms' }"
         >
           <div class="flex items-center justify-center mb-4">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] p-[2px] shadow-lg shadow-[#49b1f5]/30">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] p-[2px] shadow-lg shadow-[#7CB342]/30">
               <div class="w-full h-full rounded-2xl bg-black/50 backdrop-blur flex items-center justify-center">
                 <Icon icon="lucide:leaf" class="w-8 h-8 text-white" />
               </div>
@@ -98,23 +98,23 @@ const socialLinks = [
           :class="{ 'animate-in': isVisible }"
           :style="{ animationDelay: '200ms' }"
         >
-          <router-link to="/" class="text-white/70 hover:text-[#49b1f5] transition-colors flex items-center">
+          <router-link to="/" class="text-white/70 hover:text-[#7CB342] transition-colors flex items-center">
             <Icon icon="lucide:home" class="w-3.5 h-3.5 mr-1.5" />
             首页
           </router-link>
-          <router-link to="/archives" class="text-white/70 hover:text-[#49b1f5] transition-colors flex items-center">
+          <router-link to="/archives" class="text-white/70 hover:text-[#7CB342] transition-colors flex items-center">
             <Icon icon="lucide:archive" class="w-3.5 h-3.5 mr-1.5" />
             归档
           </router-link>
-          <router-link to="/tags" class="text-white/70 hover:text-[#49b1f5] transition-colors flex items-center">
+          <router-link to="/tags" class="text-white/70 hover:text-[#7CB342] transition-colors flex items-center">
             <Icon icon="lucide:tags" class="w-3.5 h-3.5 mr-1.5" />
             标签
           </router-link>
-          <router-link to="/categories" class="text-white/70 hover:text-[#49b1f5] transition-colors flex items-center">
+          <router-link to="/categories" class="text-white/70 hover:text-[#7CB342] transition-colors flex items-center">
             <Icon icon="lucide:folder" class="w-3.5 h-3.5 mr-1.5" />
             分类
           </router-link>
-          <router-link to="/about" class="text-white/70 hover:text-[#49b1f5] transition-colors flex items-center">
+          <router-link to="/about" class="text-white/70 hover:text-[#7CB342] transition-colors flex items-center">
             <Icon icon="lucide:user" class="w-3.5 h-3.5 mr-1.5" />
             关于
           </router-link>
@@ -129,7 +129,7 @@ const socialLinks = [
           <p class="flex items-center justify-center">
             <Icon icon="lucide:copyright" class="w-3.5 h-3.5 mr-1.5" />
             2025 - {{ currentYear }} By 
-            <span class="text-[#49b1f5] ml-1 font-medium">Leguan</span>
+            <span class="text-[#7CB342] ml-1 font-medium">Leguan</span>
           </p>
           <p class="flex items-center justify-center space-x-1.5">
             <span>Powered by</span>

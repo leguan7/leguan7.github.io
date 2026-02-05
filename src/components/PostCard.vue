@@ -51,7 +51,7 @@ const coverImage = computed(() => {
 
 // 随机渐变色
 const gradientColors = [
-  'from-[#49b1f5] to-[#0abcf9]',
+  'from-[#7CB342] to-[#8BC34A]',
   'from-pink-500 to-rose-500',
   'from-purple-500 to-violet-500',
   'from-green-500 to-emerald-500',
@@ -90,7 +90,7 @@ const categoryGradient = computed(() => {
         />
         <!-- 遮罩层 -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-        <div class="absolute inset-0 bg-[#49b1f5]/0 group-hover:bg-[#49b1f5]/20 transition-colors duration-500"></div>
+        <div class="absolute inset-0 bg-[#7CB342]/0 group-hover:bg-[#7CB342]/20 transition-colors duration-500"></div>
         
         <!-- 日期角标 -->
         <div 
@@ -113,7 +113,7 @@ const categoryGradient = computed(() => {
         <!-- 悬浮显示阅读按钮 -->
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
           <span class="px-4 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full text-sm font-medium text-gray-800 dark:text-white shadow-lg flex items-center">
-            <Icon icon="lucide:book-open" class="w-4 h-4 mr-2 text-[#49b1f5]" />
+            <Icon icon="lucide:book-open" class="w-4 h-4 mr-2 text-[#7CB342]" />
             阅读全文
           </span>
         </div>
@@ -138,7 +138,7 @@ const categoryGradient = computed(() => {
 
       <!-- 标题 -->
       <router-link :to="`/post/${post.slug}`" class="group/title">
-        <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white group-hover/title:text-[#49b1f5] transition-colors duration-300 line-clamp-2">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white group-hover/title:text-[#7CB342] transition-colors duration-300 line-clamp-2">
           {{ post.title }}
         </h2>
       </router-link>
@@ -156,7 +156,7 @@ const categoryGradient = computed(() => {
             v-for="tag in post.tags.slice(0, 3)"
             :key="tag"
             :to="{ path: '/tags', query: { tag } }"
-            class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 hover:bg-[#49b1f5] hover:text-white transition-all duration-300 flex items-center"
+            class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 hover:bg-[#7CB342] hover:text-white transition-all duration-300 flex items-center"
           >
             <Icon icon="lucide:hash" class="w-2.5 h-2.5 mr-0.5" />
             {{ tag }}
@@ -169,7 +169,7 @@ const categoryGradient = computed(() => {
         <!-- 阅读信息 -->
         <div class="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
           <span class="flex items-center">
-            <Icon icon="lucide:clock" class="w-3.5 h-3.5 mr-1 text-[#49b1f5]" />
+            <Icon icon="lucide:clock" class="w-3.5 h-3.5 mr-1 text-[#7CB342]" />
             {{ readingTime }} 分钟
           </span>
         </div>

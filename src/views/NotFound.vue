@@ -47,11 +47,11 @@ onUnmounted(() => {
     <div class="text-center">
       <!-- 404 动画数字 -->
       <div class="relative mb-8">
-        <div class="text-[150px] md:text-[200px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#49b1f5] to-[#0abcf9] leading-none select-none opacity-20">
+        <div class="text-[150px] md:text-[200px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7CB342] to-[#8BC34A] leading-none select-none opacity-20">
           404
         </div>
         <div class="absolute inset-0 flex items-center justify-center">
-          <Icon icon="lucide:ghost" class="w-24 h-24 md:w-32 md:h-32 text-[#49b1f5] animate-float" />
+          <Icon icon="lucide:ghost" class="w-24 h-24 md:w-32 md:h-32 text-[#7CB342] animate-float" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@ onUnmounted(() => {
           <Icon icon="lucide:home" class="w-4 h-4 mr-2" />
           返回首页
         </router-link>
-        <button @click="$router.back()" class="btn border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-[#49b1f5] hover:text-[#49b1f5]">
+        <button @click="$router.back()" class="btn border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-[#7CB342] hover:text-[#7CB342]">
           <Icon icon="lucide:arrow-left" class="w-4 h-4 mr-2" />
           返回上一页
         </button>
@@ -83,34 +83,34 @@ onUnmounted(() => {
         :class="{ 'animate-in': isCardVisible(0) }"
       >
         <h3 class="font-bold text-gray-800 dark:text-white mb-3 flex items-center text-sm">
-          <Icon icon="lucide:compass" class="w-4 h-4 mr-2 text-[#49b1f5]" />
+          <Icon icon="lucide:compass" class="w-4 h-4 mr-2 text-[#7CB342]" />
           你可能想去的页面
         </h3>
         <div class="space-y-2">
           <router-link 
             to="/archives"
-            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#49b1f5] transition-colors text-sm py-1"
+            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#7CB342] transition-colors text-sm py-1"
           >
             <Icon icon="lucide:archive" class="w-4 h-4 mr-2" />
             归档 - 查看所有文章
           </router-link>
           <router-link 
             to="/categories"
-            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#49b1f5] transition-colors text-sm py-1"
+            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#7CB342] transition-colors text-sm py-1"
           >
             <Icon icon="lucide:folder-open" class="w-4 h-4 mr-2" />
             分类 - 按分类浏览
           </router-link>
           <router-link 
             to="/tags"
-            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#49b1f5] transition-colors text-sm py-1"
+            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#7CB342] transition-colors text-sm py-1"
           >
             <Icon icon="lucide:tags" class="w-4 h-4 mr-2" />
             标签 - 按标签浏览
           </router-link>
           <router-link 
             to="/about"
-            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#49b1f5] transition-colors text-sm py-1"
+            class="flex items-center text-gray-600 dark:text-gray-400 hover:text-[#7CB342] transition-colors text-sm py-1"
           >
             <Icon icon="lucide:user" class="w-4 h-4 mr-2" />
             关于 - 了解博主

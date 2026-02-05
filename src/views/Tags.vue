@@ -104,7 +104,7 @@ function getTagSize(count: number): string {
         class="relative text-center text-white z-10 banner-content"
         :class="{ 'animate-in': isSectionVisible('banner') }"
       >
-        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] p-[2px] shadow-lg shadow-[#49b1f5]/30">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] p-[2px] shadow-lg shadow-[#7CB342]/30">
           <div class="w-full h-full rounded-2xl bg-black/30 backdrop-blur flex items-center justify-center">
             <Icon icon="lucide:tags" class="w-10 h-10 drop-shadow-lg" />
           </div>
@@ -123,8 +123,8 @@ function getTagSize(count: number): string {
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div v-if="blogStore.isLoading" class="card p-16 text-center">
         <div class="inline-flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#49b1f5]/20 to-[#0abcf9]/20 flex items-center justify-center mb-4">
-            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#49b1f5] border-t-transparent"></div>
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7CB342]/20 to-[#8BC34A]/20 flex items-center justify-center mb-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-4 border-[#7CB342] border-t-transparent"></div>
           </div>
           <p class="text-gray-500">加载中...</p>
         </div>
@@ -138,7 +138,7 @@ function getTagSize(count: number): string {
           :class="{ 'animate-in': isSectionVisible('tag-cloud') }"
         >
           <div class="flex items-center justify-center mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] flex items-center justify-center mr-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7CB342] to-[#8BC34A] flex items-center justify-center mr-3">
               <Icon icon="lucide:cloud" class="w-5 h-5 text-white" />
             </div>
             <h3 class="text-lg font-bold text-gray-800 dark:text-white">标签云</h3>
@@ -172,7 +172,7 @@ function getTagSize(count: number): string {
             :class="{ 'animate-in': isSectionVisible('selection-header') }"
           >
             <h2 class="text-xl font-bold text-gray-800 dark:text-white flex items-center">
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#49b1f5] to-[#0abcf9] flex items-center justify-center mr-2">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7CB342] to-[#8BC34A] flex items-center justify-center mr-2">
                 <Icon icon="lucide:hash" class="w-4 h-4 text-white" />
               </div>
               {{ selectedTag }}

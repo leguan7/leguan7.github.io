@@ -4,12 +4,12 @@
 
 /* Kyle's Blog / Butterfly 主题精确复刻 */
 :root {
-  --theme-color: #49b1f5;
-  --theme-color-hover: #ff7242;
+  --theme-color: #7CB342;
+  --theme-color-hover: #D4A04D;
   --font-color: #374151;
   --font-color-secondary: #4b5563;
   --font-color-muted: #6b7280;
-  --hr-border: #a4d8fa;
+  --hr-border: #A5D6A7;
   --card-bg: rgba(255, 255, 255, 0.65);
   --sidebar-bg: rgba(255, 255, 255, 0.65);
   --mask-bg: linear-gradient(transparent, rgba(0,0,0,.3));
@@ -48,7 +48,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(73, 177, 245, 0.1);
+    background: rgba(124, 179, 66, 0.1);
     border-radius: 8px;
   }
 
@@ -94,21 +94,21 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #49b1f5, #0abcf9);
+    background: linear-gradient(135deg, #7CB342, #8BC34A);
     color: white;
-    box-shadow: 0 5px 15px rgba(73, 177, 245, 0.4);
+    box-shadow: 0 5px 15px rgba(124, 179, 66, 0.4);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(73, 177, 245, 0.5);
+    box-shadow: 0 8px 25px rgba(124, 179, 66, 0.5);
     filter: brightness(1.05);
   }
 
   /* 标签样式 */
   .tag {
     @apply px-3 py-1 text-sm rounded-full transition-all duration-300 cursor-pointer;
-    background: rgba(73, 177, 245, 0.15);
+    background: rgba(124, 179, 66, 0.15);
     color: var(--theme-color);
   }
 
@@ -141,7 +141,7 @@
   .avatar-ring::before {
     content: '';
     @apply absolute inset-0 rounded-full;
-    background: linear-gradient(135deg, #49b1f5, #ff7242, #49b1f5);
+    background: linear-gradient(135deg, #7CB342, #D4A04D, #7CB342);
     background-size: 200% 200%;
     animation: gradient-rotate 3s ease infinite;
     padding: 3px;
@@ -195,7 +195,7 @@
 
   .article-content blockquote {
     @apply my-4 px-4 py-3 rounded-r-lg;
-    background: linear-gradient(to right, rgba(73, 177, 245, 0.2), rgba(73, 177, 245, 0.05));
+    background: linear-gradient(to right, rgba(124, 179, 66, 0.2), rgba(124, 179, 66, 0.05));
     border-left: 4px solid var(--theme-color);
   }
 
@@ -253,7 +253,7 @@
   }
 
   .article-content th {
-    background: rgba(73, 177, 245, 0.1);
+    background: rgba(124, 179, 66, 0.1);
   }
 
   .article-content hr {
