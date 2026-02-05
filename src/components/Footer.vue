@@ -60,10 +60,7 @@ const socialLinks = [
             Leguan's Blog
           </h3>
           <p class="text-white/60 italic text-sm leading-relaxed max-w-md">
-            "The furthest distance in the world<br/>
-            is not between life and death<br/>
-            But when I stand in front of you<br/>
-            Yet you don't know that I love you"
+            "Just go ahead"
           </p>
         </div>
 
