@@ -138,13 +138,13 @@ const categoryGradient = computed(() => {
 
       <!-- Title -->
       <router-link :to="`/post/${post.slug}`" class="group/title">
-        <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white group-hover/title:text-[#7CB342] transition-colors duration-300 line-clamp-2">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white group-hover/title:text-[#7CB342] transition-colors duration-300 line-clamp-2 pb-1.5 leading-[1.5]">
           {{ post.title }}
         </h2>
       </router-link>
 
       <!-- Excerpt -->
-      <p class="mt-3 text-gray-700 dark:text-gray-300 line-clamp-3 leading-relaxed text-sm md:text-base">
+      <p class="mt-3 text-gray-700 dark:text-gray-300 line-clamp-3 leading-relaxed text-sm md:text-base pb-1">
         {{ post.excerpt }}
       </p>
 
