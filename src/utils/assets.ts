@@ -100,6 +100,24 @@ export const IMAGES = {
   eyi: getAssetUrl('/img/eyi.jpg'),
   xiaoyaoguai: getAssetUrl('/img/xiaoyaoguai.jpg'),
   dongwucheng2: getAssetUrl('/img/dongwucheng2.webp'),
+  // TV Series covers
+  baisuizhihao: getAssetUrl('/img/baisuizhihao.webp'),
+  xinghancanlan: getAssetUrl('/img/xinghancanlan.webp'),
+  angelidemimi: getAssetUrl('/img/angelidemimi.webp'),
+  nanhong: getAssetUrl('/img/nanhong.webp'),
+  toutoucangbuzhu: getAssetUrl('/img/toutoucangbuzhu.webp'),
+  relian: getAssetUrl('/img/relian.webp'),
+  xuwoyaoyan: getAssetUrl('/img/xuwoyaoyan.webp'),
+  ruqingyun: getAssetUrl('/img/ruqingyun.webp'),
+  baoxue: getAssetUrl('/img/baoxue.webp'),
+  shidai: getAssetUrl('/img/shidai.webp'),
+  zhaoxuelu: getAssetUrl('/img/zhaoxuelu.webp'),
+  tingshuonixihuan: getAssetUrl('/img/tingshuonixihuan.webp'),
+  pinuocao: getAssetUrl('/img/pinuocao.webp'),
+  dushiaiqing: getAssetUrl('/img/dushiaiqing.webp'),
+  renyiyilian: getAssetUrl('/img/renyiyilian.webp'),
+  dangnichenshui: getAssetUrl('/img/dangnichenshui.webp'),
+  strangerthings: getAssetUrl('/img/strangerthings.webp'),
 }
 
 // Cover image pool

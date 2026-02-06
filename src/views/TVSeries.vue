@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import { COVER_IMAGES } from '@/utils/assets'
+import { IMAGES } from '@/utils/assets'
 
 // Intersection Observer for animations
 const visibleCards = ref<Set<number>>(new Set())
@@ -25,15 +25,14 @@ onMounted(() => {
           setTimeout(() => {
             visibleCards.value.add(index)
             visibleCards.value = new Set(visibleCards.value)
-          }, index * 100)
+          }, index * 80)
           observer?.unobserve(entry.target)
         }
       })
     },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
   )
 
-  // Observe all stored elements
   cardElements.value.forEach((el, index) => {
     ;(el as any).__cardIndex = index
     observer?.observe(el)
@@ -45,21 +44,60 @@ onUnmounted(() => {
 })
 
 const seriesList = [
-  { name: 'The Knockout', status: 'Completed', rating: '9.6', cover: COVER_IMAGES[0], tags: ['Crime', 'Drama', 'Mystery'], year: '2023' },
-  { name: 'Blossoms Shanghai', status: 'Watching', rating: '9.2', cover: COVER_IMAGES[1], tags: ['Period', 'Business', 'Drama'], year: '2024' },
-  { name: 'The Long Season', status: 'Completed', rating: '9.5', cover: COVER_IMAGES[2], tags: ['Mystery', 'Drama', 'Crime'], year: '2023' },
-  { name: 'The Three-Body Problem', status: 'Completed', rating: '8.8', cover: COVER_IMAGES[3], tags: ['Sci-Fi', 'Drama'], year: '2023' },
-  { name: 'Joy of Life 2', status: 'Watching', rating: '8.5', cover: COVER_IMAGES[4], tags: ['Historical', 'Political', 'Comedy'], year: '2024' },
-  { name: 'Reset', status: 'Completed', rating: '9.0', cover: COVER_IMAGES[5], tags: ['Mystery', 'Sci-Fi', 'Drama'], year: '2022' },
+  // 2025
+  { name: 'Into the Blue Clouds', year: '2025', cover: IMAGES.ruqingyun },
+  { name: 'Let Me Shine', year: '2025', cover: IMAGES.xuwoyaoyan },
+  { name: 'Morning Snow Record', year: '2025', cover: IMAGES.zhaoxuelu },
+  { name: 'Falling Into Our Love', year: '2025', cover: IMAGES.relian },
+  { name: 'Hard to Get Over', year: '2025', cover: IMAGES.nanhong },
+  // 2024
+  { name: 'Amidst a Snowstorm of Love', year: '2024', cover: IMAGES.baoxue },
+  { name: 'Stranger Things', year: '2024', cover: IMAGES.strangerthings },
+  // 2023
+  { name: 'Hidden Love', year: '2023', cover: IMAGES.toutoucangbuzhu },
+  { name: 'Secret in the Lattice', year: '2023', cover: IMAGES.angelidemimi },
+  { name: 'I Heard You Like Me', year: '2023', cover: IMAGES.tingshuonixihuan },
+  // 2022
+  { name: 'Love Like the Galaxy', year: '2022', cover: IMAGES.xinghancanlan },
+  { name: 'Love in the City', year: '2022', cover: IMAGES.dushiaiqing },
+  { name: 'Uncontrollably Fond', year: '2022', cover: IMAGES.renyiyilian },
+  // 2021
+  { name: 'Go Go Squid 2', year: '2021', cover: IMAGES.shidai },
+  // 2019
+  { name: 'A Lifetime Promise', year: '2019', cover: IMAGES.baisuizhihao },
+  { name: 'While You Were Sleeping', year: '2019', cover: IMAGES.dangnichenshui },
+  // 2018
+  { name: 'Pinocchio', year: '2018', cover: IMAGES.pinuocao },
 ]
 
-function getStatusColor(status: string) {
-  switch (status) {
-    case 'Watching': return 'bg-green-500'
-    case 'Completed': return 'bg-blue-500'
-    case 'Plan to Watch': return 'bg-yellow-500'
-    default: return 'bg-gray-500'
+// Group by year
+const groupedByYear = computed(() => {
+  const groups: { year: string; shows: typeof seriesList }[] = []
+  const yearMap = new Map<string, typeof seriesList>()
+  
+  for (const show of seriesList) {
+    if (!yearMap.has(show.year)) {
+      yearMap.set(show.year, [])
+    }
+    yearMap.get(show.year)!.push(show)
   }
+  
+  // Sort years descending
+  const sortedYears = [...yearMap.keys()].sort((a, b) => parseInt(b) - parseInt(a))
+  for (const year of sortedYears) {
+    groups.push({ year, shows: yearMap.get(year)! })
+  }
+  
+  return groups
+})
+
+// Flat index for animation
+function getFlatIndex(groupIdx: number, showIdx: number): number {
+  let idx = 0
+  for (let g = 0; g < groupIdx; g++) {
+    idx += groupedByYear.value[g].shows.length
+  }
+  return idx + showIdx
 }
 </script>
 
@@ -73,6 +111,19 @@ function getStatusColor(status: string) {
         <Icon icon="lucide:tv" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
         <h1 class="text-4xl md:text-5xl font-bold drop-shadow-lg">TV Series</h1>
         <p class="mt-3 text-white/80 text-lg">Shows that captivate the soul</p>
+
+        <!-- Description Tooltip -->
+        <div class="relative inline-flex justify-center mt-4 group/tip">
+          <div class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/40 hover:scale-110">
+            <Icon icon="lucide:quote" class="w-4 h-4 text-white" />
+          </div>
+          <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[480px] max-w-[95vw] px-8 py-3 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/25 dark:border-gray-700/20 shadow-lg opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible translate-y-2 group-hover/tip:translate-y-0 transition-all duration-300 z-20 pointer-events-none">
+            <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white/60 dark:bg-gray-800/60 border-l border-t border-white/25 dark:border-gray-700/20"></div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 text-center leading-relaxed relative z-10">
+              A timeline of the blogger's occasional drama-watching moments.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div class="wave-divider">
@@ -82,58 +133,57 @@ function getStatusColor(status: string) {
       </div>
     </header>
 
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <!-- Series Grid -->
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div 
-          v-for="(series, index) in seriesList"
-          :key="series.name"
-          :ref="(el) => setCardRef(el, index)"
-          class="card overflow-hidden group animate-card"
-          :class="{ 'animate-in': isCardVisible(index) }"
-        >
-          <!-- Cover -->
-          <div class="aspect-[16/9] relative overflow-hidden">
-            <img 
-              :src="series.cover" 
-              :alt="series.name"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              decoding="async"
-            />
-            <!-- Status Badge -->
-            <span 
-              class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-white text-xs font-medium"
-              :class="getStatusColor(series.status)"
-            >
-              {{ series.status }}
-            </span>
-            <!-- Rating -->
-            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center text-yellow-400 text-sm">
-              <Icon icon="lucide:star" class="w-3.5 h-3.5 mr-1" />
-              {{ series.rating }}
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Center line -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#7CB342] via-[#7CB342]/40 to-transparent hidden md:block"></div>
+
+        <div v-for="(group, gIdx) in groupedByYear" :key="group.year" class="mb-12 last:mb-0">
+          <!-- Year marker -->
+          <div class="flex justify-center mb-8">
+            <div class="relative z-10 px-6 py-2 rounded-full bg-[#7CB342] text-white font-bold text-lg shadow-lg shadow-[#7CB342]/30">
+              {{ group.year }}
             </div>
-            <!-- Year -->
-            <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm rounded-full px-2.5 py-1 text-white/90 text-xs">
-              {{ series.year }}
-            </div>
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
 
-          <!-- Info -->
-          <div class="p-4">
-            <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors">
-              {{ series.name }}
-            </h3>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span 
-                v-for="tag in series.tags"
-                :key="tag"
-                class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400"
-              >
-                {{ tag }}
-              </span>
+          <!-- Shows in this year -->
+          <div class="space-y-6">
+            <div
+              v-for="(show, sIdx) in group.shows"
+              :key="show.name"
+              :ref="(el) => setCardRef(el, getFlatIndex(gIdx, sIdx))"
+              class="animate-card"
+              :class="[
+                { 'animate-in': isCardVisible(getFlatIndex(gIdx, sIdx)) },
+                sIdx % 2 === 0 ? 'md:pr-[52%] md:text-right' : 'md:pl-[52%]'
+              ]"
+            >
+              <div class="inline-block card overflow-hidden group relative max-w-[200px]">
+                <!-- Cover image -->
+                <div class="relative overflow-hidden">
+                  <img
+                    :src="show.cover"
+                    :alt="show.name"
+                    class="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <!-- Gradient overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <!-- Title overlay -->
+                  <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 class="text-white font-bold text-lg drop-shadow-lg leading-[1.4] pb-0.5">
+                      {{ show.name }}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Connection dot (center line) -->
+              <div class="hidden md:block absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#7CB342] shadow-md shadow-[#7CB342]/40"
+                :class="sIdx % 2 === 0 ? 'right-[calc(50%-6px)]' : 'left-[calc(50%-6px)]'"
+              ></div>
             </div>
           </div>
         </div>
@@ -142,7 +192,7 @@ function getStatusColor(status: string) {
       <!-- Stats -->
       <div 
         :ref="(el) => setCardRef(el, seriesList.length)"
-        class="card p-6 mt-8 animate-card"
+        class="card p-6 mt-12 animate-card"
         :class="{ 'animate-in': isCardVisible(seriesList.length) }"
       >
         <div class="flex justify-around text-center">
@@ -151,12 +201,12 @@ function getStatusColor(status: string) {
             <div class="text-sm text-gray-500 mt-1">Total Series</div>
           </div>
           <div>
-            <div class="text-3xl font-bold text-green-500">{{ seriesList.filter(s => s.status === 'Watching').length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Watching</div>
+            <div class="text-3xl font-bold text-blue-500">{{ groupedByYear.length }}</div>
+            <div class="text-sm text-gray-500 mt-1">Years</div>
           </div>
           <div>
-            <div class="text-3xl font-bold text-blue-500">{{ seriesList.filter(s => s.status === 'Completed').length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Completed</div>
+            <div class="text-3xl font-bold text-purple-500">{{ groupedByYear[0]?.shows.length || 0 }}</div>
+            <div class="text-sm text-gray-500 mt-1">This Year</div>
           </div>
         </div>
       </div>
@@ -167,22 +217,63 @@ function getStatusColor(status: string) {
 <style scoped>
 .animate-card {
   opacity: 0;
-  transform: scale(0.85);
-  transform-origin: center center;
+  transform: translateY(30px);
 }
 
 .animate-card.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes slideUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
+  }
+}
+
+/* Alternating slide directions on desktop */
+@media (min-width: 768px) {
+  .animate-card:not(.animate-in) {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  .animate-card.md\:pl-\[52\%\]:not(.animate-in) {
+    transform: translateX(30px);
+  }
+
+  .animate-card.animate-in {
+    animation: slideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .animate-card.md\:pl-\[52\%\].animate-in {
+    animation: slideInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>
