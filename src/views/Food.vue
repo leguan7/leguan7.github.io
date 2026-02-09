@@ -1,105 +1,120 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
-import { COVER_IMAGES } from '@/utils/assets'
+import { IMAGES } from '@/utils/assets'
 
-// Animation visibility
-const visibleCards = ref<Set<number>>(new Set())
-
-const setCardRef = (el: any, index: number) => {}
-
-const isCardVisible = (index: number) => visibleCards.value.has(index)
+const animateAll = ref(false)
 
 onMounted(() => {
-  // Immediately mark all cards visible with staggered animation
-  for (let i = 0; i < 50; i++) {
-    setTimeout(() => {
-      visibleCards.value.add(i)
-      visibleCards.value = new Set(visibleCards.value)
-    }, i * 150)
-  }
+  animateAll.value = true
 })
 
-const foodList = [
-  { 
-    name: 'Chongqing Noodles', 
-    type: 'Noodles', 
-    rating: '9.5', 
-    cover: COVER_IMAGES[0], 
-    tags: ['Spicy', 'Authentic', 'Breakfast'], 
-    location: 'Chongqing',
-    description: 'Spicy and flavorful, one bowl fills you with energy'
+interface Game {
+  name: string
+  cover: string
+}
+
+interface GameSection {
+  title: string
+  icon: string
+  color: string
+  glow: string
+  games: Game[]
+}
+
+const sections: GameSection[] = [
+  {
+    title: 'Wishlist',
+    icon: 'lucide:shopping-cart',
+    color: '#f59e0b',
+    glow: 'rgba(245, 158, 11, 0.4)',
+    games: [
+      { name: 'NBA 2K26', cover: IMAGES.nba2k26 },
+      { name: 'Shadow Blade Zero', cover: IMAGES.yingzhiren },
+      { name: 'Monster Hunter Wilds', cover: IMAGES.guailiehuangye },
+      { name: "Baldur's Gate 3", cover: IMAGES.bodezhimen3 },
+    ],
   },
-  { 
-    name: 'Cantonese Dim Sum', 
-    type: 'Dim Sum', 
-    rating: '9.3', 
-    cover: COVER_IMAGES[1], 
-    tags: ['Delicate', 'Cantonese', 'Traditional'], 
-    location: 'Guangdong',
-    description: 'Shrimp dumplings, siu mai, chicken feet - tea time essentials'
+  {
+    title: 'Up Next',
+    icon: 'lucide:clock',
+    color: '#8b5cf6',
+    glow: 'rgba(139, 92, 246, 0.4)',
+    games: [
+      { name: 'Elden Ring', cover: IMAGES.laotouhuan },
+      { name: 'Civilization VI', cover: IMAGES.wenming6 },
+    ],
   },
-  { 
-    name: 'Chengdu Hot Pot', 
-    type: 'Hot Pot', 
-    rating: '9.8', 
-    cover: COVER_IMAGES[2], 
-    tags: ['Spicy', 'Social', 'Late Night'], 
-    location: 'Sichuan',
-    description: 'Butter broth with beef tripe, pure heaven'
+  {
+    title: 'Played',
+    icon: 'lucide:trophy',
+    color: '#10b981',
+    glow: 'rgba(16, 185, 129, 0.4)',
+    games: [
+      { name: 'League of Legends', cover: IMAGES.lol },
+      { name: 'CS:GO', cover: IMAGES.csgo },
+      { name: 'Valorant', cover: IMAGES.valorant },
+      { name: 'Monster Hunter: World', cover: IMAGES.guailieshijie },
+      { name: 'NBA 2K25', cover: IMAGES.nba2k25 },
+      { name: 'Black Myth: Wukong', cover: IMAGES.heiwukong },
+      { name: 'NBA 2K24', cover: IMAGES.nba2k24 },
+      { name: 'Red Dead Redemption 2', cover: IMAGES.dabiaoke2 },
+      { name: 'NBA 2K23', cover: IMAGES.nba2k23 },
+      { name: 'Sekiro: Shadows Die Twice', cover: IMAGES.zhilang },
+      { name: 'Pummel Party', cover: IMAGES.paidui },
+      { name: 'It Takes Two', cover: IMAGES.shuangrenchengxing },
+      { name: 'Sifu', cover: IMAGES.sifu },
+      { name: 'Dragon Ball Z: Kakarot', cover: IMAGES.kakaluote },
+      { name: 'Left 4 Dead 2', cover: IMAGES.qiushengzhilu2 },
+      { name: 'PUBG', cover: IMAGES.pubg },
+      { name: 'The Forest', cover: IMAGES.forest },
+      { name: 'Jump Force', cover: IMAGES.jumpforce },
+      { name: 'Backrooms', cover: IMAGES.backrooms },
+      { name: 'The Witcher 3: Wild Hunt', cover: IMAGES.wushi3 },
+      { name: 'Fall Guys', cover: IMAGES.tangdouren },
+      { name: 'Tekken 7', cover: IMAGES.tiequan7 },
+      { name: 'Apex Legends', cover: IMAGES.apex },
+      { name: 'Lethal Company', cover: IMAGES.zhiminggongsi },
+      { name: 'PICO PARK', cover: IMAGES.picopark },
+      { name: 'Witch It', cover: IMAGES.nvwulaile },
+      { name: 'Goose Goose Duck', cover: IMAGES.eyasha },
+      { name: 'Project Winter', cover: IMAGES.dongrijihua },
+      { name: 'Rubber Bandits', cover: IMAGES.xiangjiaoqiangdao },
+      { name: 'Naraka: Bladepoint', cover: IMAGES.yongjiewujian },
+    ],
   },
-  { 
-    name: 'Japanese Ramen', 
-    type: 'Noodles', 
-    rating: '9.0', 
-    cover: COVER_IMAGES[3], 
-    tags: ['Rich', 'Japanese', 'Comforting'], 
-    location: 'Japan',
-    description: 'Tonkotsu broth with chashu and soft-boiled egg, soul food'
-  },
-  { 
-    name: "Xi'an Roujiamo", 
-    type: 'Snacks', 
-    rating: '9.2', 
-    cover: COVER_IMAGES[4], 
-    tags: ['Meaty', 'Traditional', 'Portable'], 
-    location: 'Shaanxi',
-    description: 'Crispy outside, tender inside, aromatic meat'
-  },
-  { 
-    name: 'Chaoshan Beef Balls', 
-    type: 'Snacks', 
-    rating: '9.4', 
-    cover: COVER_IMAGES[5], 
-    tags: ['Bouncy', 'Fresh', 'Handmade'], 
-    location: 'Guangdong',
-    description: 'Handmade beef balls, springy and delicious'
+  {
+    title: 'Backlog',
+    icon: 'lucide:package',
+    color: '#6b7280',
+    glow: 'rgba(107, 114, 128, 0.3)',
+    games: [
+      { name: 'Ghostwire: Tokyo', cover: IMAGES.youlingxian },
+      { name: 'Payday 2', cover: IMAGES.payday2 },
+      { name: 'Steep', cover: IMAGES.jixiandianfeng },
+      { name: 'Need for Speed Heat', cover: IMAGES.jipinfeiche },
+      { name: 'Borderlands 2', cover: IMAGES.wuzhuzhidi2 },
+      { name: 'Football Manager 2022', cover: IMAGES.zuqiu2022 },
+      { name: 'Football Manager 2024', cover: IMAGES.zuqiu2024 },
+      { name: 'Death Stranding', cover: IMAGES.siwanggeqian },
+      { name: 'Destiny 2', cover: IMAGES.mingyun2 },
+      { name: 'Shadow of the Tomb Raider', cover: IMAGES.gumuliying },
+      { name: 'Dying Light', cover: IMAGES.xiaoguang },
+      { name: 'Supraland', cover: IMAGES.supulalan },
+      { name: 'Ghostrunner', cover: IMAGES.youlingxingzhe },
+      { name: 'Ghostrunner 2', cover: IMAGES.youlingxingzhe2 },
+      { name: 'Farming Simulator 22', cover: IMAGES.moninongchang22 },
+      { name: 'Moving Out', cover: IMAGES.hunaobanjia },
+      { name: 'Bus Simulator 21', cover: IMAGES.monibashi21 },
+      { name: 'Dead Island 2', cover: IMAGES.siwangdao2 },
+      { name: 'Shift Happens', cover: IMAGES.yixinghuanwei },
+      { name: 'ARK: Survival Evolved', cover: IMAGES.fangzhou },
+    ],
   },
 ]
 
-const foodTypes = ['All', 'Noodles', 'Hot Pot', 'Dim Sum', 'Snacks']
-const selectedType = ref('All')
-
-const filteredFood = ref(foodList)
-
-function filterByType(type: string) {
-  selectedType.value = type
-  if (type === 'All') {
-    filteredFood.value = foodList
-  } else {
-    filteredFood.value = foodList.filter(f => f.type === type)
-  }
-}
-
-function getTypeColor(type: string) {
-  const colors: Record<string, string> = {
-    'Noodles': 'bg-orange-500',
-    'Hot Pot': 'bg-red-500',
-    'Dim Sum': 'bg-pink-500',
-    'Snacks': 'bg-yellow-500',
-  }
-  return colors[type] || 'bg-gray-500'
-}
+// Flatten for total count
+const totalGames = sections.reduce((sum, s) => sum + s.games.length, 0)
 </script>
 
 <template>
@@ -109,9 +124,22 @@ function getTypeColor(type: string) {
       <div class="absolute inset-0 bg-black/40"></div>
       
       <div class="relative text-center text-white z-10">
-        <Icon icon="lucide:utensils" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
-        <h1 class="text-4xl md:text-5xl font-bold drop-shadow-lg">Food</h1>
-        <p class="mt-3 text-white/80 text-lg">Life is too short for bad food</p>
+        <Icon icon="lucide:gamepad-2" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
+        <h1 class="text-4xl md:text-5xl font-bold drop-shadow-lg">Games</h1>
+        <p class="mt-3 text-white/80 text-lg">Press Start — another world awaits</p>
+
+        <!-- Description Tooltip -->
+        <div class="relative inline-flex justify-center mt-4 group/tip">
+          <div class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/40 hover:scale-110">
+            <Icon icon="lucide:quote" class="w-4 h-4 text-white" />
+          </div>
+          <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[480px] max-w-[95vw] px-8 py-3 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/25 dark:border-gray-700/20 shadow-lg opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible translate-y-2 group-hover/tip:translate-y-0 transition-all duration-300 z-20 pointer-events-none">
+            <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white/60 dark:bg-gray-800/60 border-l border-t border-white/25 dark:border-gray-700/20"></div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 text-center leading-relaxed relative z-10">
+              A PC gamer's journey — ranked battles, open-world adventures, and late-night co-op with friends.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div class="wave-divider">
@@ -121,110 +149,80 @@ function getTypeColor(type: string) {
       </div>
     </header>
 
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <!-- Filter Tags -->
-      <div 
-        :ref="(el) => setCardRef(el, 0)"
-        class="card p-4 mb-8 animate-card"
-        :class="{ 'animate-in': isCardVisible(0) }"
-      >
-        <div class="flex flex-wrap gap-2 justify-center">
-          <button
-            v-for="type in foodTypes"
-            :key="type"
-            @click="filterByType(type)"
-            class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
-            :class="selectedType === type 
-              ? 'bg-[#7CB342] text-white shadow-lg shadow-[#7CB342]/30' 
-              : 'bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600/50'"
-          >
-            {{ type }}
-          </button>
-        </div>
-      </div>
-
-      <!-- Food Grid -->
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div 
-          v-for="(food, index) in filteredFood"
-          :key="food.name"
-          :ref="(el) => setCardRef(el, index + 1)"
-          class="card overflow-hidden group animate-card"
-          :class="{ 'animate-in': isCardVisible(index + 1) }"
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <!-- Sections -->
+      <div v-for="(section, sIdx) in sections" :key="section.title" class="mb-14 last:mb-0">
+        <!-- Section Header -->
+        <div
+          class="flex items-center gap-3 mb-6 game-section-header"
+          :class="{ 'animate-in': animateAll }"
+          :style="{ animationDelay: (sIdx * 200) + 'ms' }"
         >
-          <!-- Cover -->
-          <div class="aspect-[4/3] relative overflow-hidden">
-            <img 
-              :src="food.cover" 
-              :alt="food.name"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              decoding="async"
-            />
-            <!-- Type Badge -->
-            <span 
-              class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-white text-xs font-medium"
-              :class="getTypeColor(food.type)"
-            >
-              {{ food.type }}
-            </span>
-            <!-- Rating -->
-            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center text-yellow-400 text-sm">
-              <Icon icon="lucide:star" class="w-3.5 h-3.5 mr-1" />
-              {{ food.rating }}
-            </div>
-            <!-- Location -->
-            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center text-white/90 text-xs">
-              <Icon icon="lucide:map-pin" class="w-3 h-3 mr-1" />
-              {{ food.location }}
-            </div>
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div
+            class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
+            :style="{ background: section.color, boxShadow: `0 4px 15px ${section.glow}` }"
+          >
+            <Icon :icon="section.icon" class="w-5 h-5 text-white" />
           </div>
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-white">{{ section.title }}</h2>
+          <span class="text-sm text-gray-400 ml-1">({{ section.games.length }})</span>
+          <div class="flex-1 h-px ml-3" :style="{ background: `linear-gradient(to right, ${section.color}40, transparent)` }"></div>
+        </div>
 
-          <!-- Info -->
-          <div class="p-4">
-            <h3 class="font-bold text-lg text-gray-800 dark:text-white group-hover:text-[#7CB342] transition-colors">
-              {{ food.name }}
-            </h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
-              {{ food.description }}
-            </p>
-            <div class="flex flex-wrap gap-1.5 mt-3">
-              <span 
-                v-for="tag in food.tags"
-                :key="tag"
-                class="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400"
-              >
-                {{ tag }}
-              </span>
+        <!-- Game Grid -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+          <div
+            v-for="(game, gIdx) in section.games"
+            :key="game.name"
+            class="game-card group"
+            :class="{ 'animate-in': animateAll }"
+            :style="{ animationDelay: (sIdx * 200 + gIdx * 80) + 'ms', '--glow-color': section.glow }"
+          >
+            <div class="aspect-[3/4] relative rounded-lg overflow-hidden">
+              <img
+                :src="game.cover"
+                :alt="game.name"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+                decoding="async"
+              />
+              <!-- Hover overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2.5">
+                <h3 class="text-white text-xs font-semibold leading-tight drop-shadow-lg">{{ game.name }}</h3>
+              </div>
+              <!-- Glow border on hover -->
+              <div
+                class="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-current transition-colors duration-300 pointer-events-none"
+                :style="{ color: section.color }"
+              ></div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Stats -->
-      <div 
-        :ref="(el) => setCardRef(el, filteredFood.length + 1)"
-        class="card p-6 mt-8 animate-card"
-        :class="{ 'animate-in': isCardVisible(filteredFood.length + 1) }"
+      <div
+        class="stats-card mt-10"
+        :class="{ 'animate-in': animateAll }"
       >
-        <div class="flex justify-around text-center">
-          <div>
-            <div class="text-3xl font-bold text-[#7CB342]">{{ foodList.length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Food Collection</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-orange-500">{{ foodList.filter(f => f.type === 'Noodles').length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Noodles</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-red-500">{{ foodList.filter(f => f.type === 'Hot Pot').length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Hot Pot</div>
-          </div>
-          <div>
-            <div class="text-3xl font-bold text-yellow-500">{{ foodList.filter(f => f.type === 'Snacks').length }}</div>
-            <div class="text-sm text-gray-500 mt-1">Snacks</div>
+        <div class="card p-6">
+          <div class="flex justify-around text-center">
+            <div>
+              <div class="text-3xl font-bold text-purple-500">{{ totalGames }}</div>
+              <div class="text-sm text-gray-500 mt-1">Total</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-green-500">{{ sections[2].games.length }}</div>
+              <div class="text-sm text-gray-500 mt-1">Played</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-amber-500">{{ sections[0].games.length }}</div>
+              <div class="text-sm text-gray-500 mt-1">Wishlist</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-gray-500">{{ sections[3].games.length }}</div>
+              <div class="text-sm text-gray-500 mt-1">Backlog</div>
+            </div>
           </div>
         </div>
       </div>
@@ -233,24 +231,74 @@ function getTypeColor(type: string) {
 </template>
 
 <style scoped>
-.animate-card {
+/* Game card: compact cover with glow hover */
+.game-card {
   opacity: 0;
-  transform: scale(0.6);
+  transform: scale(0.85);
   transform-origin: center center;
+  will-change: transform, opacity;
 }
 
-.animate-card.animate-in {
-  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.game-card.animate-in {
+  animation: cardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes scaleUp {
+.game-card:hover {
+  z-index: 10;
+}
+
+.game-card .aspect-\[3\/4\] {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.game-card:hover .aspect-\[3\/4\] {
+  box-shadow: 0 8px 25px var(--glow-color, rgba(0,0,0,0.3));
+}
+
+/* Section header animation */
+.game-section-header {
+  opacity: 0;
+  transform: translateX(-20px);
+  will-change: transform, opacity;
+}
+
+.game-section-header.animate-in {
+  animation: slideRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stats card */
+.stats-card {
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.stats-card.animate-in {
+  animation: cardPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardPop {
   0% {
     opacity: 0;
-    transform: scale(0.6);
+    transform: scale(0.85);
   }
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>

@@ -88,10 +88,10 @@ const router = createRouter({
       meta: { title: 'Movies' }
     },
     {
-      path: '/food',
-      name: 'food',
+      path: '/games',
+      name: 'games',
       component: () => import('@/views/Food.vue'),
-      meta: { title: 'Food' }
+      meta: { title: 'Games' }
     },
     {
       path: '/:pathMatch(.*)*',

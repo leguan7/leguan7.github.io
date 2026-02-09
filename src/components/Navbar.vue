@@ -36,7 +36,7 @@ const navItems = [
       { name: 'Anime', path: '/bangumi', icon: 'lucide:clapperboard' },
       { name: 'TV Series', path: '/tvseries', icon: 'lucide:tv' },
       { name: 'Movies', path: '/movies', icon: 'lucide:film' },
-      { name: 'Food', path: '/food', icon: 'lucide:utensils' },
+      { name: 'Games', path: '/games', icon: 'lucide:gamepad-2' },
       { name: 'Memories', path: '/memory', icon: 'lucide:camera' }
     ]
   },
