@@ -93,6 +93,7 @@ const moviesList = [
   { name: 'My Sister', year: '2021', rating: '8.8', cover: IMAGES.wodejiejie, tags: ['Drama', 'Family'] },
   // 2020
   { name: 'Violet Evergarden: The Movie', year: '2020', rating: '9.2', cover: IMAGES.ziluolan, tags: ['Animation', 'Drama', 'Romance'] },
+  { name: 'Vanguard', year: '2020', rating: '8.3', cover: IMAGES.jixianfeng, tags: ['Action', 'Adventure', 'Comedy'] },
   // 2019
   { name: 'Pegasus', year: '2019', rating: '8.8', cover: IMAGES.feichirensheng, tags: ['Comedy', 'Sports', 'Racing'] },
   { name: 'One Piece: Stampede', year: '2019', rating: '9.3', cover: IMAGES.kuangrexingdong, tags: ['Animation', 'Adventure', 'Action'] },

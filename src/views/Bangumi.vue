@@ -256,6 +256,22 @@ const bangumiList = [
     description: 'In a distant future, children pilot mechas called FRANXX to fight mysterious creatures. Former prodigy Hiro meets the mysterious Zero Two with horns on her head: "I found you, my DARLING."',
   },
   {
+    name: 'A Fragrant Flower Blooms with Dignity',
+    status: 'Completed',
+    cover: IMAGES.xunxianghuaduo,
+    tags: ['Romance', 'School', 'Slice of Life'],
+    link: 'https://www.bilibili.com/bangumi/media/md26641346',
+    description: 'Beyond the curtain lies a world I thought I\'d never be part of. Chidori High, a bottom-tier boys school, is constantly looked down upon by the prestigious Kikyo Girls School next door. Rintaro, a student at Chidori, is often feared due to his intimidating appearance. One day, a customer named Kaoruko tells him at his family\'s cake shop: "I never thought you were scary at all." She\'s from Kikyo — and her unbiased warmth begins to change his world.',
+  },
+  {
+    name: 'Record of Ragnarok S2',
+    status: 'Completed',
+    cover: IMAGES.nvwushen,
+    tags: ['Action', 'Fantasy', 'Battle'],
+    link: 'https://www.yinhuadm.xyz/v/10973.html',
+    description: 'The second round of the battle between gods and humanity begins! Adapted from the hit manga serialized in Monthly Comic Zenon with over 14 million copies sold. 13 one-on-one battles between representatives of gods and humanity will decide the fate of mankind. Epic battles animated by Graphinica.',
+  },
+  {
     name: 'The "Hentai" Prince and the Stony Cat',
     status: 'Completed',
     cover: IMAGES.buxiaomao,
