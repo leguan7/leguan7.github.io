@@ -16,7 +16,7 @@ interface Game {
 
 interface GameSection {
   title: string
-  icon: string
+  emoji: string
   color: string
   glow: string
   games: Game[]
@@ -25,7 +25,7 @@ interface GameSection {
 const sections: GameSection[] = [
   {
     title: 'Wishlist',
-    icon: 'lucide:shopping-cart',
+    emoji: '🎯',
     color: '#f59e0b',
     glow: 'rgba(245, 158, 11, 0.4)',
     games: [
@@ -37,7 +37,7 @@ const sections: GameSection[] = [
   },
   {
     title: 'Up Next',
-    icon: 'lucide:clock',
+    emoji: '🕹️',
     color: '#8b5cf6',
     glow: 'rgba(139, 92, 246, 0.4)',
     games: [
@@ -47,7 +47,7 @@ const sections: GameSection[] = [
   },
   {
     title: 'Played',
-    icon: 'lucide:trophy',
+    emoji: '🏆',
     color: '#10b981',
     glow: 'rgba(16, 185, 129, 0.4)',
     games: [
@@ -85,7 +85,7 @@ const sections: GameSection[] = [
   },
   {
     title: 'Backlog',
-    icon: 'lucide:package',
+    emoji: '📦',
     color: '#6b7280',
     glow: 'rgba(107, 114, 128, 0.3)',
     games: [
@@ -158,12 +158,11 @@ const totalGames = sections.reduce((sum, s) => sum + s.games.length, 0)
           :class="{ 'animate-in': animateAll }"
           :style="{ animationDelay: (sIdx * 200) + 'ms' }"
         >
-          <div
-            class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
-            :style="{ background: section.color, boxShadow: `0 4px 15px ${section.glow}` }"
-          >
-            <Icon :icon="section.icon" class="w-5 h-5 text-white" />
+          <div class="section-accent" :style="{ '--accent': section.color, '--accent-glow': section.glow }">
+            <span class="section-accent-bar"></span>
+            <span class="section-accent-dot"></span>
           </div>
+          <span class="section-emoji">{{ section.emoji }}</span>
           <h2 class="text-2xl font-bold text-gray-800 dark:text-white">{{ section.title }}</h2>
           <span class="text-sm text-gray-400 ml-1">({{ section.games.length }})</span>
           <div class="flex-1 h-px ml-3" :style="{ background: `linear-gradient(to right, ${section.color}40, transparent)` }"></div>
@@ -300,5 +299,57 @@ const totalGames = sections.reduce((sum, s) => sum + s.games.length, 0)
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Section accent — colored bar + dot */
+.section-accent {
+  position: relative;
+  width: 4px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.section-accent-bar {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: height 0.35s ease, box-shadow 0.35s ease;
+}
+
+.section-accent-dot {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  translate: -50% 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.game-section-header:hover .section-accent-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.game-section-header:hover .section-accent-bar {
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* Section emoji */
+.section-emoji {
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.game-section-header:hover .section-emoji {
+  transform: scale(1.25) rotate(-8deg);
 }
 </style>
