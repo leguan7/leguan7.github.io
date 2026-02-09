@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useBlogStore } from '@/stores/blog'
 import { formatDate } from '@/utils/markdown'
@@ -7,60 +7,33 @@ import { formatDate } from '@/utils/markdown'
 const blogStore = useBlogStore()
 
 // Banner visibility
-const bannerRef = ref<HTMLElement | null>(null)
 const bannerVisible = ref(false)
 
 // Year section visibility
 const visibleSections = ref<Set<string>>(new Set())
-const sectionRefs = ref<Map<string, HTMLElement>>(new Map())
 
-let observer: IntersectionObserver | null = null
-
-const setSectionRef = (el: any, key: string) => {
-  if (el) {
-    sectionRefs.value.set(key, el)
-    ;(el as any).__sectionKey = key
-    observer?.observe(el)
-  }
-}
+const setSectionRef = (el: any, key: string) => {}
 
 const isSectionVisible = (key: string) => visibleSections.value.has(key)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const key = (entry.target as any).__sectionKey as string
-        if (entry.isIntersecting && !visibleSections.value.has(key)) {
-          visibleSections.value.add(key)
-          visibleSections.value = new Set(visibleSections.value)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  // Observe banner
-  if (bannerRef.value) {
-    ;(bannerRef.value as any).__sectionKey = 'banner'
-    observer.observe(bannerRef.value)
-  }
-
-  // Observe existing year sections
-  sectionRefs.value.forEach((el, key) => {
-    ;(el as any).__sectionKey = key
-    observer?.observe(el)
-  })
-
   // Banner visible immediately
   setTimeout(() => {
     bannerVisible.value = true
   }, 100)
-})
 
-onUnmounted(() => {
-  observer?.disconnect()
+  // Immediately mark all sections visible with staggered animation
+  const keys: string[] = []
+  for (let y = 2020; y <= 2030; y++) {
+    keys.push(`year-${y}`)
+  }
+  keys.push('end-mark')
+  keys.forEach((key, i) => {
+    setTimeout(() => {
+      visibleSections.value.add(key)
+      visibleSections.value = new Set(visibleSections.value)
+    }, i * 150)
+  })
 })
 </script>
 
@@ -71,7 +44,6 @@ onUnmounted(() => {
       <div class="absolute inset-0 bg-black/30"></div>
       
       <div 
-        ref="bannerRef"
         class="relative text-center text-white z-10 banner-content"
         :class="{ 'animate-in': bannerVisible }"
       >
@@ -177,20 +149,20 @@ onUnmounted(() => {
 .year-section,
 .post-item {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .banner-content.animate-in,
 .year-section.animate-in,
 .post-item.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

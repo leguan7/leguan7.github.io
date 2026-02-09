@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { IMAGES } from '@/utils/assets'
 import QQModal from '@/components/QQModal.vue'
@@ -7,46 +7,21 @@ import QQModal from '@/components/QQModal.vue'
 const avatar = IMAGES.avatar
 const showQQModal = ref(false)
 
-// Intersection Observer for animations
+// Animation visibility
 const visibleCards = ref<Set<number>>(new Set())
-const cardRefs = ref<(HTMLElement | null)[]>([])
-let observer: IntersectionObserver | null = null
 
-const setCardRef = (el: any, index: number) => {
-  if (el) {
-    cardRefs.value[index] = el
-  }
-}
+const setCardRef = (el: any, index: number) => {}
 
 const isCardVisible = (index: number) => visibleCards.value.has(index)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = (entry.target as any).__cardIndex as number
-        if (entry.isIntersecting && !visibleCards.value.has(index)) {
-          setTimeout(() => {
-            visibleCards.value.add(index)
-            visibleCards.value = new Set(visibleCards.value)
-          }, index * 150)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  cardRefs.value.forEach((el, index) => {
-    if (el) {
-      ;(el as any).__cardIndex = index
-      observer?.observe(el)
-    }
-  })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  // Immediately mark all cards visible with staggered animation
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      visibleCards.value.add(i)
+      visibleCards.value = new Set(visibleCards.value)
+    }, i * 150)
+  }
 })
 
 const skills = [
@@ -252,18 +227,18 @@ const timeline = [
 
 .animate-card {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .animate-card.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

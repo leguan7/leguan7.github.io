@@ -7,25 +7,11 @@ const currentYear = new Date().getFullYear()
 const isVisible = ref(false)
 const showQQModal = ref(false)
 
-const footerRef = ref<HTMLElement | null>(null)
-
 onMounted(() => {
-  // Observe footer entering viewport
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !isVisible.value) {
-          isVisible.value = true
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
-  )
-  
-  if (footerRef.value) {
-    observer.observe(footerRef.value)
-  }
+  // Immediately make footer visible
+  setTimeout(() => {
+    isVisible.value = true
+  }, 80)
 })
 
 const socialLinks = [
@@ -37,7 +23,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <footer ref="footerRef" class="relative mt-8">
+  <footer class="relative mt-8">
     <!-- Semi-transparent Overlay -->
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/40 backdrop-blur-sm"></div>
     
@@ -178,18 +164,18 @@ const socialLinks = [
 <style scoped>
 .footer-item {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .footer-item.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

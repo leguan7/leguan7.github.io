@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useBlogStore } from '@/stores/blog'
@@ -11,44 +11,25 @@ const blogStore = useBlogStore()
 
 const selectedCategory = ref<string | null>(null)
 
-// Intersection Observer for animations
+// Animation visibility
 const visibleSections = ref<Set<string>>(new Set())
-const sectionRefs = ref<Map<string, HTMLElement>>(new Map())
-let observer: IntersectionObserver | null = null
 
-const setSectionRef = (el: any, key: string) => {
-  if (el) {
-    sectionRefs.value.set(key, el)
-    ;(el as any).__sectionKey = key
-    observer?.observe(el)
-  }
-}
+const setSectionRef = (el: any, key: string) => {}
 
 const isSectionVisible = (key: string) => visibleSections.value.has(key)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const key = (entry.target as any).__sectionKey as string
-        if (entry.isIntersecting && !visibleSections.value.has(key)) {
-          visibleSections.value.add(key)
-          visibleSections.value = new Set(visibleSections.value)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  sectionRefs.value.forEach((el, key) => {
-    ;(el as any).__sectionKey = key
-    observer?.observe(el)
+  // Immediately mark all sections visible with staggered animation
+  const keys = ['banner', 'selection-header', 'empty-state']
+  for (let i = 0; i < 20; i++) {
+    keys.push(`category-${i}`)
+  }
+  keys.forEach((key, i) => {
+    setTimeout(() => {
+      visibleSections.value.add(key)
+      visibleSections.value = new Set(visibleSections.value)
+    }, i * 150)
   })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
 })
 
 watch(
@@ -220,7 +201,7 @@ function getCategoryStyle(name: string) {
 .selection-header,
 .empty-state {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
@@ -228,13 +209,13 @@ function getCategoryStyle(name: string) {
 .category-card.animate-in,
 .selection-header.animate-in,
 .empty-state.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

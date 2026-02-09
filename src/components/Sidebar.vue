@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useBlogStore } from '@/stores/blog'
@@ -10,50 +10,19 @@ const router = useRouter()
 const showQQModal = ref(false)
 const blogStore = useBlogStore()
 
-// Independent visibility state for each sidebar card
+// Animation visibility
 const visibleCards = ref<Set<number>>(new Set())
-const cardRefs = ref<(HTMLElement | null)[]>([])
-let observer: IntersectionObserver | null = null
 
-const setCardRef = (el: any, index: number) => {
-  if (el) {
-    cardRefs.value[index] = el
-    if (observer) {
-      ;(el as any).__cardIndex = index
-      observer.observe(el)
-    }
-  }
-}
+const setCardRef = (el: any, index: number) => {}
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = (entry.target as any).__cardIndex as number
-        if (entry.isIntersecting && !visibleCards.value.has(index)) {
-          // Add delay based on card index
-          setTimeout(() => {
-            visibleCards.value.add(index)
-            visibleCards.value = new Set(visibleCards.value)
-          }, index * 120)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
-  )
-
-  // Observe existing elements
-  cardRefs.value.forEach((el, index) => {
-    if (el) {
-      ;(el as any).__cardIndex = index
-      observer?.observe(el)
-    }
-  })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  // Immediately mark all cards visible with staggered animation
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      visibleCards.value.add(i)
+      visibleCards.value = new Set(visibleCards.value)
+    }, i * 150)
+  }
 })
 
 const isCardVisible = (index: number) => visibleCards.value.has(index)
@@ -372,18 +341,18 @@ function getTagColor(index: number) {
 
 .sidebar-card {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .sidebar-card.animate-in {
-  animation: sidebarScaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes sidebarScaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

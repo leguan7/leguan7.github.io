@@ -1,46 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { IMAGES } from '@/utils/assets'
 
-// Intersection Observer for animations
-const visibleCards = ref<Set<number>>(new Set())
-const cardElements = ref<Map<number, HTMLElement>>(new Map())
-let observer: IntersectionObserver | null = null
-
-const setCardRef = (el: any, index: number) => {
-  if (el) {
-    cardElements.value.set(index, el)
-  }
-}
-
-const isCardVisible = (index: number) => visibleCards.value.has(index)
+// Animation visibility - use a single reactive trigger instead of per-card setTimeout
+const animateAll = ref(false)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = (entry.target as any).__cardIndex as number
-        if (entry.isIntersecting && !visibleCards.value.has(index)) {
-          setTimeout(() => {
-            visibleCards.value.add(index)
-            visibleCards.value = new Set(visibleCards.value)
-          }, index * 80)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-  )
-
-  cardElements.value.forEach((el, index) => {
-    ;(el as any).__cardIndex = index
-    observer?.observe(el)
-  })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  animateAll.value = true
 })
 
 const seriesList = [
@@ -152,12 +119,12 @@ function getFlatIndex(groupIdx: number, showIdx: number): number {
             <div
               v-for="(show, sIdx) in group.shows"
               :key="show.name"
-              :ref="(el) => setCardRef(el, getFlatIndex(gIdx, sIdx))"
               class="animate-card"
               :class="[
-                { 'animate-in': isCardVisible(getFlatIndex(gIdx, sIdx)) },
+                { 'animate-in': animateAll },
                 sIdx % 2 === 0 ? 'md:pr-[52%] md:text-right' : 'md:pl-[52%]'
               ]"
+              :style="{ animationDelay: (getFlatIndex(gIdx, sIdx) * 150) + 'ms' }"
             >
               <div class="inline-block card overflow-hidden group relative max-w-[200px]">
                 <!-- Cover image -->
@@ -191,9 +158,8 @@ function getFlatIndex(groupIdx: number, showIdx: number): number {
 
       <!-- Stats -->
       <div 
-        :ref="(el) => setCardRef(el, seriesList.length)"
-        class="card p-6 mt-12 animate-card"
-        :class="{ 'animate-in': isCardVisible(seriesList.length) }"
+        class="card p-6 mt-12 stats-card"
+        :class="{ 'animate-in': animateAll }"
       >
         <div class="flex justify-around text-center">
           <div>
@@ -217,63 +183,34 @@ function getFlatIndex(groupIdx: number, showIdx: number): number {
 <style scoped>
 .animate-card {
   opacity: 0;
-  transform: translateY(30px);
+  transform: scale(0.85);
+  transform-origin: center center;
+  will-change: transform, opacity;
 }
 
 .animate-card.animate-in {
-  animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes slideUp {
+.stats-card {
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.stats-card.animate-in {
+  animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: scale(0.85);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Alternating slide directions on desktop */
-@media (min-width: 768px) {
-  .animate-card:not(.animate-in) {
-    transform: translateX(-30px);
-    opacity: 0;
-  }
-
-  .animate-card.md\:pl-\[52\%\]:not(.animate-in) {
-    transform: translateX(30px);
-  }
-
-  .animate-card.animate-in {
-    animation: slideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .animate-card.md\:pl-\[52\%\].animate-in {
-    animation: slideInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 </style>

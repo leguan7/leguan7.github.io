@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import type { Post } from '@/types'
 import { formatDate, estimateReadingTime } from '@/utils/markdown'
@@ -11,34 +11,13 @@ const props = defineProps<{
   index?: number
 }>()
 
-const cardRef = ref<HTMLElement | null>(null)
 const isVisible = ref(false)
-let observer: IntersectionObserver | null = null
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !isVisible.value) {
-          // Add delay based on index for staggered animation
-          const delay = (props.index || 0) * 150
-          setTimeout(() => {
-            isVisible.value = true
-          }, delay)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  if (cardRef.value) {
-    observer.observe(cardRef.value)
-  }
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  const delay = (props.index || 0) * 200
+  setTimeout(() => {
+    isVisible.value = true
+  }, delay)
 })
 
 const readingTime = computed(() => estimateReadingTime(props.post.content))
@@ -67,7 +46,6 @@ const categoryGradient = computed(() => {
 
 <template>
   <article 
-    ref="cardRef"
     class="card overflow-hidden group post-card"
     :class="[
       layout === 'right' ? 'md:flex md:flex-row-reverse' : 'md:flex',
@@ -187,18 +165,18 @@ const categoryGradient = computed(() => {
 <style scoped>
 .post-card {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .post-card.animate-in {
-  animation: cardScaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes cardScaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

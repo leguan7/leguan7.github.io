@@ -1,47 +1,23 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { COVER_IMAGES } from '@/utils/assets'
 
-// Intersection Observer for animations
+// Animation visibility
 const visibleCards = ref<Set<number>>(new Set())
-const cardElements = ref<Map<number, HTMLElement>>(new Map())
-let observer: IntersectionObserver | null = null
 
-const setCardRef = (el: any, index: number) => {
-  if (el) {
-    cardElements.value.set(index, el)
-  }
-}
+const setCardRef = (el: any, index: number) => {}
 
 const isCardVisible = (index: number) => visibleCards.value.has(index)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = (entry.target as any).__cardIndex as number
-        if (entry.isIntersecting && !visibleCards.value.has(index)) {
-          setTimeout(() => {
-            visibleCards.value.add(index)
-            visibleCards.value = new Set(visibleCards.value)
-          }, index * 100)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  // Observe all stored elements
-  cardElements.value.forEach((el, index) => {
-    ;(el as any).__cardIndex = index
-    observer?.observe(el)
-  })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  // Immediately mark all cards visible with staggered animation
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      visibleCards.value.add(i)
+      visibleCards.value = new Set(visibleCards.value)
+    }, i * 150)
+  }
 })
 
 const foodList = [
@@ -259,18 +235,18 @@ function getTypeColor(type: string) {
 <style scoped>
 .animate-card {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .animate-card.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

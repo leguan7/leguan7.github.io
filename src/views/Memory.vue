@@ -1,45 +1,31 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { COVER_IMAGES } from '@/utils/assets'
 
-// Intersection Observer for animations
+// Animation visibility
 const visibleCards = ref<Set<string>>(new Set())
-const cardElements = ref<Map<string, HTMLElement>>(new Map())
-let observer: IntersectionObserver | null = null
 
-const setCardRef = (el: any, key: string) => {
-  if (el) {
-    cardElements.value.set(key, el)
-  }
-}
+const setCardRef = (el: any, key: string) => {}
 
 const isCardVisible = (key: string) => visibleCards.value.has(key)
 
 onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const key = (entry.target as any).__cardKey as string
-        if (entry.isIntersecting && !visibleCards.value.has(key)) {
-          visibleCards.value.add(key)
-          visibleCards.value = new Set(visibleCards.value)
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-  )
-
-  // Observe all stored elements
-  cardElements.value.forEach((el, key) => {
-    ;(el as any).__cardKey = key
-    observer?.observe(el)
+  // Immediately mark all cards visible with staggered animation
+  const keys: string[] = []
+  for (let g = 0; g < 10; g++) {
+    keys.push(`group-${g}`)
+    for (let i = 0; i < 10; i++) {
+      keys.push(`item-${g}-${i}`)
+    }
+  }
+  keys.push('stats')
+  keys.forEach((key, i) => {
+    setTimeout(() => {
+      visibleCards.value.add(key)
+      visibleCards.value = new Set(visibleCards.value)
+    }, i * 150)
   })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
 })
 
 const memories = [
@@ -172,18 +158,18 @@ const memories = [
 <style scoped>
 .animate-card {
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.6);
   transform-origin: center center;
 }
 
 .animate-card.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes scaleIn {
+@keyframes scaleUp {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.6);
   }
   100% {
     opacity: 1;

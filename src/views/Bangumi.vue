@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { Icon } from '@iconify/vue'
 import { IMAGES } from '@/utils/assets'
 
@@ -7,59 +7,23 @@ import { IMAGES } from '@/utils/assets'
 const PAGE_SIZE = 10
 const currentPage = ref(1)
 
-// Intersection Observer for animations
-const visibleCards = ref<Set<number>>(new Set())
-const cardElements = ref<Map<number, HTMLElement>>(new Map())
-let observer: IntersectionObserver | null = null
-
-const setCardRef = (el: any, index: number) => {
-  if (el) {
-    cardElements.value.set(index, el)
-  }
-}
-
-const isCardVisible = (index: number) => visibleCards.value.has(index)
-
-function setupObserver() {
-  observer?.disconnect()
-  visibleCards.value = new Set()
-  cardElements.value = new Map()
-
-  nextTick(() => {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = (entry.target as any).__cardIndex as number
-          if (entry.isIntersecting && !visibleCards.value.has(index)) {
-            setTimeout(() => {
-              visibleCards.value.add(index)
-              visibleCards.value = new Set(visibleCards.value)
-            }, index * 100)
-            observer?.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
-    )
-
-    cardElements.value.forEach((el, index) => {
-      ;(el as any).__cardIndex = index
-      observer?.observe(el)
-    })
-  })
-}
+// Animation visibility - use a single reactive trigger instead of per-card setTimeout
+const animateAll = ref(false)
 
 onMounted(() => {
-  setupObserver()
+  // Single state change triggers all animations via CSS animation-delay
+  animateAll.value = true
 })
 
-// Re-observe when page changes
+// Animation key to force re-render on page change
+const animKey = ref(0)
+
 watch(currentPage, () => {
-  setupObserver()
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
+  animateAll.value = false
+  animKey.value++
+  nextTick(() => {
+    animateAll.value = true
+  })
 })
 
 const bangumiList = [
@@ -407,10 +371,10 @@ function getStatusColor(status: string) {
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
         <div 
           v-for="(bangumi, index) in paginatedList"
-          :key="bangumi.name"
-          :ref="(el) => setCardRef(el, index)"
+          :key="animKey + '-' + bangumi.name"
           class="card overflow-hidden group animate-card"
-          :class="{ 'animate-in': isCardVisible(index) }"
+          :class="{ 'animate-in': animateAll }"
+          :style="{ animationDelay: (index * 150) + 'ms' }"
         >
           <div class="flex flex-row h-[160px]">
             <!-- Cover (horizontal, left side) -->
@@ -510,9 +474,8 @@ function getStatusColor(status: string) {
 
       <!-- Stats -->
       <div 
-        :ref="(el) => setCardRef(el, paginatedList.length)"
-        class="card p-6 mt-8 animate-card"
-        :class="{ 'animate-in': isCardVisible(paginatedList.length) }"
+        class="card p-6 mt-8 stats-card"
+        :class="{ 'animate-in': animateAll }"
       >
         <div class="flex justify-around text-center">
           <div>
@@ -538,13 +501,25 @@ function getStatusColor(status: string) {
   opacity: 0;
   transform: scale(0.85);
   transform-origin: center center;
+  will-change: transform, opacity;
 }
 
 .animate-card.animate-in {
-  animation: scaleIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scaleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes scaleIn {
+.stats-card {
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.stats-card.animate-in {
+  animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleUp {
   0% {
     opacity: 0;
     transform: scale(0.85);
