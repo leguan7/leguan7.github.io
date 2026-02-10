@@ -111,9 +111,7 @@ const barGradients = [
         class="relative text-center text-white z-10 banner-content"
         :class="{ 'animate-in': contentVisible }"
       >
-        <div class="w-14 h-14 mx-auto mb-3 rounded-xl bg-[#7CB342]/90 backdrop-blur flex items-center justify-center shadow-lg">
-          <Icon icon="lucide:tags" class="w-7 h-7 drop-shadow" />
-        </div>
+        <Icon icon="lucide:tags" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
         <h1 class="text-3xl md:text-4xl font-bold drop-shadow-lg">Tags</h1>
         <p class="mt-2 text-white/80 text-sm leading-relaxed">{{ blogStore.allTags.length }} tags in total</p>
       </div>
