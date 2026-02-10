@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 import { Icon } from '@iconify/vue'
-import { getAssetUrl } from '@/utils/assets'
+import { getAssetUrl, IMAGES } from '@/utils/assets'
 
 // Current celebrity
 const activeCelebrity = ref<'tao' | 'harden'>('tao')
@@ -37,59 +37,45 @@ const taoInfo = {
 }
 
 const taoDiscography = [
-  { album: 'David Tao', year: '1997', highlight: true, songs: [
+  { album: 'David Tao', year: '1997', cover: IMAGES.albumDavidTao, highlight: true, songs: [
+    { en: 'Love Can Be So Simple', cn: '爱，很简单' },
     { en: 'Beach', cn: '沙滩' },
     { en: 'Airport 10:30', cn: '飞机场的10:30' },
-    { en: 'Love Can Be So Simple', cn: '爱，很简单' },
-    { en: 'Spring Breeze', cn: '望春风' },
   ]},
-  { album: "I'm OK", year: '1999', highlight: false, songs: [
+  { album: "I'm OK", year: '1999', cover: IMAGES.albumImOk, highlight: false, songs: [
     { en: 'Find Myself', cn: '找自己' },
     { en: 'Small Town Girl', cn: '小镇姑娘' },
-    { en: 'Angeline', cn: 'Angeline' },
-    { en: 'Moon Represents Whose Heart', cn: '月亮代表谁的心' },
   ]},
-  { album: 'Black Tangerine', year: '2002', highlight: false, songs: [
+  { album: 'Black Tangerine', year: '2002', cover: IMAGES.albumBlackTangerine, highlight: false, songs: [
     { en: 'Black Tangerine', cn: '黑色柳丁' },
-    { en: 'Ghost', cn: '鬼' },
-    { en: 'Dear God', cn: 'Dear God' },
-    { en: 'Katrina', cn: 'Katrina' },
+    { en: 'Melody', cn: 'Melody' },
   ]},
-  { album: 'The Road of Music 1997–2003', year: '2003', highlight: false, songs: [
-    { en: 'Ordinary Friends', cn: '普通朋友' },
-    { en: 'Olia', cn: 'Olia' },
-    { en: 'Butterfly', cn: '蝴蝶' },
-    { en: 'Hate Dream of the Red Chamber', cn: '讨厌红楼梦' },
-  ]},
-  { album: 'The Great Leap', year: '2005', highlight: false, songs: [
+  { album: 'The Great Leap', year: '2005', cover: IMAGES.albumTaipingshengshi, highlight: false, songs: [
     { en: 'I Just Love You', cn: '就是爱你' },
-    { en: 'Art of War', cn: '孙子兵法' },
-    { en: 'Day by Day', cn: '天天' },
     { en: 'Susan Says', cn: 'Susan说' },
   ]},
-  { album: 'Too Beautiful', year: '2006', highlight: false, songs: [
+  { album: 'Too Beautiful', year: '2006', cover: IMAGES.albumTaimeili, highlight: false, songs: [
     { en: 'Too Beautiful', cn: '太美丽' },
-    { en: 'Today You Will Marry Me', cn: '今天你要嫁给我' },
     { en: "Can't Forget", cn: '忘不了' },
-    { en: 'Catherine', cn: 'Catherine' },
   ]},
-  { album: '69 Movement', year: '2009', highlight: false, songs: [
+  { album: '69 Movement', year: '2009', cover: IMAGES.album69yuezhang, highlight: false, songs: [
     { en: '69 Movement', cn: '69乐章' },
-    { en: 'In a Thought', cn: '一念之间' },
     { en: 'Aloha', cn: 'Aloha' },
-    { en: 'About David Tao', cn: '关于陶喆' },
   ]},
-  { album: 'Hello Goodbye', year: '2013', highlight: false, songs: [
+  { album: 'Hello Goodbye', year: '2013', cover: IMAGES.albumGoodbye, highlight: false, songs: [
     { en: 'Say Goodbye Properly', cn: '好好说再见' },
-    { en: 'If One Day', cn: '如果有一天' },
     { en: 'Angel', cn: 'Angel' },
-    { en: 'True Love Hold On', cn: '真爱等一下' },
+  ]},
+  { album: 'STUPID POP SONGS', year: '2025', cover: IMAGES.albumStupidPopSongs, highlight: false, songs: [
+    { en: 'Stupid Pop Song', cn: 'Stupid Pop Song' },
+    { en: 'Moonchild', cn: 'Moonchild' },
+    { en: 'Venus', cn: '星心 Venus' },
   ]},
 ]
 
 const taoTopSongs = [
   { en: 'Love Can Be So Simple', cn: '爱，很简单', album: 'David Tao', year: '1997' },
-  { en: 'Ordinary Friends', cn: '普通朋友', album: 'The Road of Music', year: '2003' },
+  { en: 'Ordinary Friends', cn: '普通朋友', album: 'David Tao', year: '1997' },
   { en: 'Find Myself', cn: '找自己', album: "I'm OK", year: '1999' },
   { en: 'I Just Love You', cn: '就是爱你', album: 'The Great Leap', year: '2005' },
   { en: 'Black Tangerine', cn: '黑色柳丁', album: 'Black Tangerine', year: '2002' },
@@ -378,27 +364,38 @@ const hardenHonors = [
                 class="album-item group"
                 :class="{ 'album-hl': album.highlight }"
               >
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 rounded-full bg-[#7CB342]/10 flex items-center justify-center">
-                    <Icon icon="lucide:disc" class="w-5 h-5 text-[#7CB342] group-hover:animate-spin" />
+                <div class="flex items-center gap-4">
+                  <!-- Vinyl Album Cover -->
+                  <div class="vinyl-wrapper flex-shrink-0">
+                    <div class="vinyl-disc">
+                      <img
+                        :src="album.cover"
+                        :alt="album.album"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div class="vinyl-hole"></div>
+                    </div>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <h4 class="text-gray-800 dark:text-white font-bold text-sm leading-relaxed">{{ album.album }}</h4>
+                    <div class="flex items-center gap-2">
+                      <h4 class="text-gray-800 dark:text-white font-bold text-sm leading-relaxed truncate">{{ album.album }}</h4>
+                      <span v-if="album.highlight" class="px-2.5 py-1 rounded-full bg-[#7CB342]/10 text-[#7CB342] text-[11px] font-bold flex-shrink-0 leading-normal">
+                        DEBUT
+                      </span>
+                    </div>
                     <span class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">{{ album.year }}</span>
+                    <div class="flex flex-wrap gap-1.5 mt-2" v-if="album.songs.length">
+                      <span
+                        v-for="song in album.songs"
+                        :key="song.en"
+                        class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 leading-normal whitespace-nowrap flex-shrink-0"
+                        :title="song.cn"
+                      >
+                        {{ song.en }}
+                      </span>
+                    </div>
                   </div>
-                  <span v-if="album.highlight" class="px-2.5 py-1 rounded-full bg-[#7CB342]/10 text-[#7CB342] text-[11px] font-bold flex-shrink-0 leading-normal">
-                    DEBUT
-                  </span>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    v-for="song in album.songs"
-                    :key="song.en"
-                    class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 leading-normal"
-                    :title="song.cn"
-                  >
-                    {{ song.en }}
-                  </span>
                 </div>
               </div>
             </div>
@@ -702,6 +699,63 @@ const hardenHonors = [
 .album-hl {
   border-color: rgba(124, 179, 66, 0.2);
   background: rgba(124, 179, 66, 0.06);
+}
+
+/* ============ Vinyl Disc ============ */
+.vinyl-wrapper {
+  width: 64px;
+  height: 64px;
+}
+
+.vinyl-disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.15),
+    0 0 0 5px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: vinyl-spin 8s linear infinite;
+}
+
+.vinyl-disc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0px,
+    transparent 8px,
+    rgba(0, 0, 0, 0.03) 8px,
+    rgba(0, 0, 0, 0.03) 9px
+  );
+  pointer-events: none;
+}
+
+.vinyl-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--card-bg, rgba(255, 255, 255, 0.65));
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dark .vinyl-hole {
+  background: rgba(18, 18, 18, 0.72);
 }
 
 /* ============ Career Block ============ */

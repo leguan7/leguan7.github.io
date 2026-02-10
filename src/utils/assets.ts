@@ -181,6 +181,15 @@ export const IMAGES = {
   // Celebrity images
   davidTao: getAssetUrl('/img/Tao.avif'),
   harden: getAssetUrl('/img/Harden.webp'),
+  // David Tao album covers
+  albumDavidTao: getAssetUrl('/img/DavidTao.webp'),
+  albumImOk: getAssetUrl("/img/i'm ok.webp"),
+  albumBlackTangerine: getAssetUrl('/img/blacktangerine.webp'),
+  albumTaipingshengshi: getAssetUrl('/img/taipingshengshi.webp'),
+  albumTaimeili: getAssetUrl('/img/taimeili.webp'),
+  album69yuezhang: getAssetUrl('/img/69yuezhang.webp'),
+  albumGoodbye: getAssetUrl('/img/goodbye.webp'),
+  albumStupidPopSongs: getAssetUrl('/img/stupidpopsongs.webp'),
 }
 
 // Cover image pool
