@@ -359,13 +359,17 @@ onBeforeUnmount(() => {
           class="lightbox-overlay"
           @click.self="closeLightbox"
         >
+          <!-- Nav buttons outside lightbox-container to avoid transform containment -->
+          <button class="lightbox-nav lightbox-nav-left" v-show="imageLoaded" @click.stop="prevPhoto">
+            <Icon icon="lucide:chevron-left" class="w-6 h-6" />
+          </button>
+          <button class="lightbox-nav lightbox-nav-right" v-show="imageLoaded" @click.stop="nextPhoto">
+            <Icon icon="lucide:chevron-right" class="w-6 h-6" />
+          </button>
+
           <div class="lightbox-container">
             <!-- Main image area -->
             <div class="lightbox-main">
-              <button class="lightbox-nav lightbox-nav-left" @click.stop="prevPhoto">
-                <Icon icon="lucide:chevron-left" class="w-6 h-6" />
-              </button>
-
               <img
                 :src="currentPhoto.src"
                 :alt="currentPhoto.title"
@@ -374,10 +378,6 @@ onBeforeUnmount(() => {
                 :key="currentPhoto.src"
                 @load="onLightboxImgLoad"
               />
-
-              <button class="lightbox-nav lightbox-nav-right" @click.stop="nextPhoto">
-                <Icon icon="lucide:chevron-right" class="w-6 h-6" />
-              </button>
 
               <button class="lightbox-close" v-show="imageLoaded" @click="closeLightbox">&times;</button>
 
