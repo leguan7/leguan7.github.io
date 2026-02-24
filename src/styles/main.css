@@ -1,6 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-butterfly-primary: #49b1f5;
+  --color-butterfly-hover: #3ca5e8;
+  --color-butterfly-light: #a4d8fa;
+  --color-butterfly-dark: #0d7db5;
+
+  --font-sans: 'Playwrite NZ', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+  --animate-bounce-slow: bounce 2s infinite;
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
 
 /* Playwrite NZ Basic Font */
 @font-face {
