@@ -57,7 +57,7 @@ public/
 └── img/            # 静态图片
 ```
 
-## 添加文章
+## 添加文章（部分功能）
 
 1. 在 `public/posts/` 目录下创建 `.md` 文件
 2. 在 `public/posts/index.json` 中添加文章元数据
