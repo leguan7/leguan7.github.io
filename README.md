@@ -76,7 +76,7 @@ src/
 │   ├── Bangumi.vue
 │   ├── Movies.vue
 │   ├── TVSeries.vue
-│   ├── Food.vue
+│   ├── Game.vue
 │   ├── Fitness.vue
 │   ├── Celebrities.vue
 │   ├── Links.vue

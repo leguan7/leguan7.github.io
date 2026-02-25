@@ -90,7 +90,7 @@ const router = createRouter({
     {
       path: '/games',
       name: 'games',
-      component: () => import('@/views/Food.vue'),
+      component: () => import('@/views/Game.vue'),
       meta: { title: 'Games' }
     },
     {
