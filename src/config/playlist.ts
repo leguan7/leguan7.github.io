@@ -35,4 +35,10 @@ export const defaultPlaylist: Song[] = [
   { title: 'BNM', artist: '肆意人生', src: '/music/肆意人生 - BNM.mp3' },
   { title: '槿城', artist: '须尽欢', src: '/music/须尽欢 - 新 (44)槿城.mp3' },
   { title: '青石巷', artist: '魏琮霏', src: '/music/魏琮霏 - 青石巷.mp3' },
+  { title: '花日', artist: 'CMJ', src: '/music/CMJ - 花日.mp3' },
+  { title: '初见 (钢琴轻音乐)', artist: '睡觉轻音乐', src: '/music/睡觉轻音乐 - 初见 (钢琴轻音乐).mp3' },
+  { title: '森之境', artist: 'Hea2t', src: '/music/Hea2t - 森之境.mp3' },
+  { title: '安静的阅读', artist: '治愈音乐集', src: '/music/治愈音乐集 - 安静的阅读 (适合看书 刷题的舒缓解压轻音乐).mp3' },
+  { title: '温柔の救赎', artist: '纯音乐收藏馆', src: '/music/纯音乐收藏馆 - 温柔の救赎.mp3' },
+  { title: '星茶会', artist: '灰澈', src: '/music/灰澈 - 星茶会.mp3' },
 ]

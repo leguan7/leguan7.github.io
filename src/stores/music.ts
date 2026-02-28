@@ -33,7 +33,7 @@ export const useMusicStore = defineStore('music', () => {
 
   // State
   const playlist = ref<Song[]>([...defaultPlaylist])
-  const currentIndex = ref(saved.currentIndex ?? 0)
+  const currentIndex = ref(Math.floor(Math.random() * defaultPlaylist.length))
   const isPlaying = ref(false)
   const volume = ref(saved.volume ?? 0.5)
   const currentTime = ref(0)
@@ -95,9 +95,7 @@ export const useMusicStore = defineStore('music', () => {
     // Load saved song
     if (currentSong.value) {
       audio.src = resolveSrc(currentSong.value.src)
-      if (saved.currentTime) {
-        audio.currentTime = saved.currentTime
-      }
+      audio.currentTime = 0
       // Auto-play if requested
       if (autoPlay) {
         audio.play().then(() => {
