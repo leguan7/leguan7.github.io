@@ -166,9 +166,9 @@ function saveWeatherCache(data: WeatherData, weatherTs: number, aqiTs: number) {
 async function fetchWithRetry(url: string, retries = 2, timeout = 6000): Promise<Response> {
   for (let i = 0; i < retries; i++) {
     try {
-      const resp = await fetch(url, { signal: AbortSignal.timeout(timeout) })
+      const resp = await fetch(url, { signal: AbortSignal.timeout(timeout), cache: 'no-store' })
       if (resp.ok) return resp
-    } catch {
+    } catch (e) {
       if (i === retries - 1) throw new Error('Fetch failed after retries')
     }
     // Wait before retry (500ms, 1000ms...)
@@ -194,8 +194,9 @@ async function fetchWeather() {
   }
 
   try {
-    const resp = await fetchWithRetry('https://wttr.in/Nanshan,Shenzhen?format=j1')
-    const data = await resp.json()
+    const resp = await fetchWithRetry('https://wttr.in/Nanshan,Shenzhen?format=j1', 2, 12000)
+    const json = await resp.json()
+    const data = json.data ?? json
     const current = data.current_condition?.[0]
     if (current) {
       const weatherData: WeatherData = {
@@ -208,10 +209,13 @@ async function fetchWeather() {
         aqiLevel: cache.weather?.aqiLevel || ''
       }
       weather.value = weatherData
+      weatherLoading.value = false
       const weatherTs = now
-      // Fetch AQI
-      const aqiTs = await refreshAqi(weatherData, weatherTs)
-      saveWeatherCache(weather.value, weatherTs, aqiTs || cache.aqiTs || 0)
+      // Fetch AQI in background — don't block weather display
+      refreshAqi(weatherData, weatherTs).then(aqiTs => {
+        saveWeatherCache(weatherData, weatherTs, aqiTs || cache.aqiTs || 0)
+      })
+      return
     }
   } catch {
     // Network failed — fall back to stale cache if available
