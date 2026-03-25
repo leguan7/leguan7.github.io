@@ -13,6 +13,8 @@ const fitnessLogs: FitnessLog[] = [
   { date: '2026-03-10', muscleGroups: ['全身'], note: 'Full Body' },
   { date: '2026-03-17', muscleGroups: ['胸', '三头'], note: 'Chest + Triceps' },
   { date: '2026-03-18', muscleGroups: ['背', '二头'], note: 'Back + Biceps' },
+  { date: '2026-03-19', muscleGroups: ['肩'], note: 'Shoulders' },
+  { date: '2026-03-25', muscleGroups: ['胸', '三头'], note: 'Chest + Triceps' },
 ]
 
 const muscleGroupConfig: Record<string, { color: string; label: string }> = {
