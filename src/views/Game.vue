@@ -121,33 +121,32 @@ const totalGames = sections.reduce((sum, s) => sum + s.games.length, 0)
 <template>
   <div>
     <!-- Banner -->
-    <header class="relative h-[45vh] min-h-[320px] flex items-center justify-center">
-      <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute inset-0 bg-black/40"></div>
-        <div class="wave-divider">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path d="M0,50 C150,100 350,0 600,50 C850,100 1050,0 1200,50 C1350,100 1440,50 1440,50 L1440,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/>
-          </svg>
-        </div>
-      </div>
+    <header class="relative min-h-[max(45vh,320px)] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 bg-black/40"></div>
 
-      <div class="relative text-center text-white z-10">
+      <div class="relative text-center text-white z-10 px-4 py-10">
         <Icon icon="lucide:gamepad-2" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
         <h1 class="text-4xl md:text-5xl font-bold drop-shadow-lg">Games</h1>
         <p class="mt-3 text-white/80 text-lg">Press Start — another world awaits</p>
 
         <!-- Description Tooltip -->
-        <div class="relative inline-flex justify-center mt-4 group/tip">
+        <div class="relative inline-flex flex-col items-center mt-4 group/tip">
           <div class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/40 hover:scale-110">
             <Icon icon="lucide:quote" class="w-4 h-4 text-white" />
           </div>
-          <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[480px] max-w-[95vw] px-8 py-3 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/25 dark:border-gray-700/20 shadow-lg opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible translate-y-2 group-hover/tip:translate-y-0 transition-all duration-300 z-20 pointer-events-none">
+          <div class="relative mt-3 w-[480px] max-w-[95vw] px-8 py-3 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-white/25 dark:border-gray-700/20 shadow-lg opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible transition-all duration-300 pointer-events-none">
             <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white/60 dark:bg-gray-800/60 border-l border-t border-white/25 dark:border-gray-700/20"></div>
             <p class="text-sm text-gray-600 dark:text-gray-300 text-center leading-relaxed relative z-10">
               A PC gamer's journey — ranked battles, open-world adventures, and late-night co-op with friends.
             </p>
           </div>
         </div>
+      </div>
+
+      <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+          <path d="M0,50 C150,100 350,0 600,50 C850,100 1050,0 1200,50 C1350,100 1440,50 1440,50 L1440,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/>
+        </svg>
       </div>
     </header>
 
