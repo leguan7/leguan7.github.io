@@ -289,8 +289,15 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <!-- Banner -->
-    <header class="relative h-[45vh] min-h-[320px] flex items-center justify-center overflow-hidden">
-      <div class="absolute inset-0 bg-black/40"></div>
+    <header class="relative h-[45vh] min-h-[320px] flex items-center justify-center">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="wave-divider">
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,50 C150,100 350,0 600,50 C850,100 1050,0 1200,50 C1350,100 1440,50 1440,50 L1440,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/>
+          </svg>
+        </div>
+      </div>
 
       <div class="relative text-center text-white z-10">
         <Icon icon="lucide:images" class="w-16 h-16 mx-auto mb-4 drop-shadow-lg" />
@@ -309,12 +316,6 @@ onBeforeUnmount(() => {
             </p>
           </div>
         </div>
-      </div>
-
-      <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path d="M0,50 C150,100 350,0 600,50 C850,100 1050,0 1200,50 C1350,100 1440,50 1440,50 L1440,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/>
-        </svg>
       </div>
     </header>
 

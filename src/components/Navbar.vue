@@ -32,7 +32,6 @@ const navItems = [
     name: 'Life', 
     icon: 'lucide:coffee',
     children: [
-      { name: 'Fitness', path: '/fitness', icon: 'lucide:dumbbell' },
       { name: 'Anime', path: '/bangumi', icon: 'lucide:clapperboard' },
       { name: 'TV Series', path: '/tvseries', icon: 'lucide:tv' },
       { name: 'Movies', path: '/movies', icon: 'lucide:film' },

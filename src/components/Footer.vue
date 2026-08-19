@@ -26,7 +26,6 @@ const allPages = [
   { title: 'Tags', path: '/tags', icon: 'lucide:tags' },
   { title: 'Categories', path: '/categories', icon: 'lucide:folder' },
   { title: 'Anime', path: '/bangumi', icon: 'lucide:tv' },
-  { title: 'Fitness', path: '/fitness', icon: 'lucide:dumbbell' },
   { title: 'Thoughts', path: '/shuoshuo', icon: 'lucide:message-square' },
   { title: 'Memories', path: '/memory', icon: 'lucide:images' },
   { title: 'TV Series', path: '/tvseries', icon: 'lucide:clapperboard' },
